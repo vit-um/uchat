@@ -27,7 +27,7 @@
 	+ How quickly did you find the option to change your personal details in the chat?
 	+ Do you know who Alf is? How old is he and what does his name mean?😊
 
-<table> 
+<table style="border:none">
 	<tr>
 		<td>
 <a href="https://sitcom.fandom.com/ru/wiki/Alf" target="_blank"><img src="Alf.jpg" height="300px"></a>
@@ -37,4 +37,4 @@
  		</td>
 	</tr>
 </table>
-## [Go back](../README.md)
+
