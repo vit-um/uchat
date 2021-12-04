@@ -21,7 +21,7 @@
 5. Sign up
 6. Find `ucode` room
 7. Choose this room (Don't add room with name `ucode`, find it plz)
-8. Write some chat message that answers the questions:
+8. Write some chat messages that will answer the questions:
 	+ Which theme is better: light or dark?
 	+ What do you want to add to this chat?
 	+ How quickly did you find the option to change your personal details in the chat?
