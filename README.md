@@ -1,8 +1,8 @@
 <p align="center">
     <a href="https://ucode.world/en/" target="_blank">
-        <img src="../marathon_C/img/ucode_logo_minimal.png?raw=true" height="100px">
+        <img src="ucode_logo_minimal.png?raw=true" height="100px">
     </a>
-    <h1 align="center">Ucode-PathFinder</h1>
+    <h1 align="center">Ucode-Chat</h1>
     <br>
 </p>
 
