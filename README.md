@@ -27,9 +27,14 @@
 	+ How quickly did you find the option to change your personal details in the chat?
 	+ Do you know who Alf is? How old is he and what does his name mean?😊
 
-###``- You don’t like cats? You just don't know how to cook them!``
- <a href="https://sitcom.fandom.com/ru/wiki/Alf" target="_blank">
-        <img src="Alf.jpg" height="500px">
- </a>
-
+<table> 
+	<tr>
+		<td>
+<a href="https://sitcom.fandom.com/ru/wiki/Alf" target="_blank"><img src="Alf.jpg" height="300px"></a>
+		</td>
+		<td>
+**"- You don’t like cats? You just don't know how to cook them!"**			
+ 		</td>
+	</tr>
+</table>
 ## [Go back](../README.md)
