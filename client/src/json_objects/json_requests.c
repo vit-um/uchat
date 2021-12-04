@@ -119,7 +119,7 @@ void join_to_room_request(GtkButton *btn, t_chat *chat) {
     gtk_list_box_unselect_all(groom->box_rooms);
     sig_stop_search_room(NULL, NULL, chat->builder);
 
-    fprintf(stdout, "joining to room %lu\n", groom->id);  //del
+    fprintf(stdout, "joining to room %llu\n", groom->id);  //del
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 
@@ -213,7 +213,7 @@ void send_sticker_request(GtkButton *btn, t_chat *chat) {
 
 void get_member_info_request(GObject *popup, t_chat *chat) {
     cJSON *j_request = cJSON_CreateObject();
-    gint user_id = (gint) g_object_get_data(popup, "member_id");
+    guint64 user_id = (guint64) g_object_get_data(popup, "member_id");
     gchar *j_data = NULL;
 
     cJSON_AddNumberToObject(j_request, "token", RQ_MEMBER_INFO);
