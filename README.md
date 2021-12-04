@@ -6,10 +6,6 @@
     <br>
 </p>
 
-## Skills
-
-Reasoning & Argumentation, Creativity, Communication, Critical Thinking, Problem Solving, Analysis, Innovation Thinking, Agility & Adaptability, Initiative, Responsibility, Self-Management, UNIX, Git, Procedural Programming, Algorithms, C
-
 ## Instalation:
 0. Support OS: Ubuntu, MacOS
 1. Download code [here](.)
