@@ -25,7 +25,7 @@
 	+ Which theme is better: light or dark?
 	+ What do you want to add to this chat?
 	+ How quickly did you find the option to change your personal details in the chat?
-	+ Do you know who Alf is? How old is he and what does his name mean ;)
+	+ Do you know who Alf is? How old is he and what does his name mean?😊
 	
  <a href="https://sitcom.fandom.com/ru/wiki/Alf" target="_blank">
         <img src="Alf.jpg" height="500px">
