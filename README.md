@@ -6,12 +6,11 @@
     <br>
 </p>
 
-## Installation:
-0. Support OS: Ubuntu, MacOS
-1. Download code [here](.)
-2. Default mode: `make`
-3. Silent debug mode: `make debug` 
-4. Files for use: uchat, uchat_server
+## About programm
+- Support OS: Ubuntu, MacOS
+- Download code [here](.)
+- Default compilation mode: `make`
+- Files for use: uchat, uchat_server
 
 ## How to use:
 1. `git clone https://github.com/vit-um/uchat.git`
