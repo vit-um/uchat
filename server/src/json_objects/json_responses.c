@@ -207,7 +207,7 @@ static gpointer upload_file_thread(gpointer data) {
     gchar *filename = NULL;
     gchar *j_data = NULL;
 
-    filename = g_strdup_printf("%s%d%s%s%s",
+    filename = g_strdup_printf("%s%lu%s%s%s",
     VM_FILES_DIR, vm_get_time(DB_MICROSECOND), file->client->user->login,
     VM_FILE_DELIM, file->name);
 
@@ -266,8 +266,8 @@ void upload_file_response(cJSON *j_request, t_client *client) {
     file->name = g_strdup(name);
     client->upload_file = true;
     g_thread_new("upload_thread", upload_file_thread, file);
-    // g_free(auth_token);
-    // g_free(name);
+    g_free(auth_token);
+    g_free(name);
 }
 
 void join_to_room_response(cJSON *j_request, t_client *client) {

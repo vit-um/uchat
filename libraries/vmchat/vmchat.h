@@ -137,6 +137,6 @@ gssize vm_send(GDataOutputStream *out_stream, gchar *str);
 t_request_type vm_get_token(cJSON *j_object);
 gchar *vm_get_valuestring(cJSON *j_object, gchar *key);
 cJSON *vm_get_object(cJSON *j_object, gchar *key);
-gchar *vm_get_time_in_str(gint miliseconds, gint8 format);
-unsigned int vm_get_time(gint8 type);
+gchar *vm_get_time_in_str(guint64 miliseconds, gint8 format);
+guint64 vm_get_time(gint8 type);
 char *vm_strdup(char *str);

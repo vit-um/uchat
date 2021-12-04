@@ -297,7 +297,7 @@ t_db_user *get_user_by_id(sqlite3 *db, guint64 user_id) {
 t_db_user *get_user_by_token(sqlite3 *db, gchar *token) {
     sqlite3_stmt *stmt;
 
-    sqlite3_prepare_v3(db, "SELECT * FROM USERS WHERE TOKEN = ?1", -1, 0, &stmt, NULL);
+    sqlite3_prepare_v3(db, "SELECT * FROM USERS WHERE AUTH_TOKEN = ?1", -1, 0, &stmt, NULL);
     sqlite3_bind_text(stmt, 1, token, -1, SQLITE_STATIC);
     return get_user(stmt);
 }

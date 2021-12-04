@@ -151,7 +151,7 @@ void add_member(char *login, guint64 user_id, guint64 room_id, t_chat *chat) {
 
 void insert_member(cJSON *member, gint room_id, t_chat *chat) {
     gchar *login = vm_get_valuestring(member, "login");
-    gint user_id = vm_get_object(member, "id")->valueint;
+    guint64 user_id = vm_get_object(member, "id")->valueint;
     t_groom *groom = NULL;
 
     groom = get_groom_by_id(room_id, chat->builder);

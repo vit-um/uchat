@@ -79,7 +79,7 @@ void ban_member_request(GObject *btn, t_chat *chat) {
     t_groom *groom = get_selected_groom(chat->builder, "listbox_rooms");
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
-    gint user_id = (gint)g_object_get_data(btn, "member_id");
+    guint64 user_id = (guint64)g_object_get_data(btn, "member_id");
 
     cJSON_AddNumberToObject(j_request, "token", RQ_BAN_MEMBER);
     cJSON_AddNumberToObject(j_request, "room_id", groom->id);
@@ -119,7 +119,7 @@ void join_to_room_request(GtkButton *btn, t_chat *chat) {
     gtk_list_box_unselect_all(groom->box_rooms);
     sig_stop_search_room(NULL, NULL, chat->builder);
 
-    fprintf(stdout, "joining to room %d\n", groom->id);
+    fprintf(stdout, "joining to room %lu\n", groom->id);  //del
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 

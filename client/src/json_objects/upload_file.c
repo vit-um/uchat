@@ -28,6 +28,7 @@ static void send_file(gchar *j_data, GFile *file, t_chat *chat) {
     vm_send(d_out, j_data);
     g_free(j_data);
     if (is_server_ready(conn)) {
+        fprintf(stdout, "server is ready\n");
         g_output_stream_splice(out, G_INPUT_STREAM(file_in),
         G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE, NULL, NULL);
     }

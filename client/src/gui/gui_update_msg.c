@@ -1,6 +1,6 @@
 #include "client.h"
 
-t_gmsg *get_gmsg_by_id(gint msg_id, gint room_id, GtkBuilder *builder) {
+t_gmsg *get_gmsg_by_id(guint64 msg_id, guint64 room_id, GtkBuilder *builder) {
     t_groom *room = get_groom_by_id(room_id, builder);
     GtkListBox *box = NULL;
     GtkListBoxRow *row = NULL;

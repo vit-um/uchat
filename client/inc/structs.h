@@ -34,12 +34,12 @@ typedef struct s_groom {
     GtkLabel *label_name;
     GHashTable *members;
     gboolean is_watched;
-    gint id;
-    gchar *room_name;
-    gchar *customer;
-    gint user_id;
-    gint date;
-    gchar *desc;
+    guint64 id;
+    char *room_name;
+    char *customer;
+    guint64 user_id;
+    guint64 date;
+    char *desc;
     gboolean is_updated;
     gint uploaded;
     gboolean select_all;
@@ -69,11 +69,11 @@ typedef struct s_gmsg {
     GtkLabel *label_text;
     GtkLabel *label_power;
     gint msg_type;
-    gchar *msg;
-    gchar *login;
-    gint date;
-    gint room_id;
-    gint msg_id;
+    char *msg;
+    char *login;
+    guint64 date;
+    guint64 room_id;
+    guint64 msg_id;
 }           t_gmsg;
 
 
@@ -102,8 +102,8 @@ typedef struct s_chat {
     GDataInputStream *in;
     GSocketConnection *conn;
     GSocketClient *client_conn;
-    gchar *auth_token;
-    gchar *login;
+    char *auth_token;
+    char *login;
     gchar *desc;
     gchar *name;
     gint argc;
@@ -114,7 +114,7 @@ typedef struct s_chat {
     gboolean upl_old_msgs;
     GtkBuilder *builder;
     gboolean valid;
-    void (*error_handler[ER_COUNT])(GtkBuilder *builder);         
+    void (*error_handler[ER_COUNT])(GtkBuilder *builder);  
     gboolean msg_placeholder;
     gboolean shift_hold;
     GtkCssProvider *css_prov;

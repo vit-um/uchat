@@ -16,12 +16,12 @@ char *vm_strdup(char *str) {
  * 
  * return time
  */
-unsigned int vm_get_time(gint8 type) {
+guint64 vm_get_time(gint8 type) {
     GDateTime *gtime = g_date_time_new_now_local();
     gint64 dt = 0;
 
     dt = g_date_time_to_unix(gtime);
-    // dt *= 1000000;
+    //dt *= 1000000; //del or correct?
     dt += g_date_time_get_microsecond(gtime);
     switch(type) {
         case DB_SECOND: {
@@ -39,7 +39,7 @@ unsigned int vm_get_time(gint8 type) {
     return dt;
 }
 
-gchar *vm_get_time_in_str(gint miliseconds, gint8 format) {
+gchar *vm_get_time_in_str(guint64 miliseconds, gint8 format) {
     GDateTime *dt = g_date_time_new_from_unix_utc(miliseconds / 1000);
     GDateTime *new = g_date_time_to_local(dt);
 

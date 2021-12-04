@@ -3,7 +3,7 @@
 /*
  * Returns groom by id, if not found NULL is returned
  */
-t_groom *get_groom_by_id(gint room_id, GtkBuilder *builder) {
+t_groom *get_groom_by_id(guint64 room_id, GtkBuilder *builder) {
     GObject *list = gtk_builder_get_object(builder, "listbox_rooms");
     GtkListBoxRow *row = NULL;
     t_groom *groom = NULL;
@@ -38,8 +38,10 @@ t_groom *get_selected_groom(GtkBuilder *builder, gchar *list_name) {
 gboolean is_same_groom(t_groom *groom, GtkBuilder *builder) {
     t_groom *current_groom = get_selected_groom(builder, "listbox_rooms");
 
-    if (!current_groom || !(current_groom->id == groom->id))
+    if (!current_groom || !(current_groom->id == groom->id)) {
+        printf("--------------- is_same_groom --------\n");
         return TRUE;
+    }
     else
         return FALSE;
 }

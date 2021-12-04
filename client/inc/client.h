@@ -194,7 +194,7 @@ void clear_label_by_name(gchar *label_name, GtkBuilder *builder);
 void mx_msgcreate_file(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own, t_chat *chat);
 void mx_open_files_dir(GtkButton *btn, t_chat *chat);
 gchar *format_text(gchar *text);
-t_gmsg *get_gmsg_by_id(gint msg_id, gint room_id, GtkBuilder *builder);
+t_gmsg *get_gmsg_by_id(guint64 msg_id, guint64 room_id, GtkBuilder *builder);
 void set_room_sett(GtkButton *btn, t_chat *chat);
 void req_room_sett(GtkButton *btn, t_chat *chat);
 void req_room_name_sett(GtkButton *btn, t_chat *chat);
@@ -232,7 +232,7 @@ t_groom *create_groom(cJSON *j_data);
 void delete_groom(t_groom *room);
 gboolean is_same_groom(t_groom *groom, GtkBuilder *builder);
 t_groom *get_selected_groom(GtkBuilder *builder, gchar *list_name);
-t_groom *get_groom_by_id(gint room_id, GtkBuilder *builder);
+t_groom *get_groom_by_id(guint64 room_id, GtkBuilder *builder);
 
 
 ///**********************|gmsg utils|**********************///
