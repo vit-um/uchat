@@ -138,5 +138,5 @@ t_request_type vm_get_token(cJSON *j_object);
 gchar *vm_get_valuestring(cJSON *j_object, gchar *key);
 cJSON *vm_get_object(cJSON *j_object, gchar *key);
 gchar *vm_get_time_in_str(gint64 miliseconds, gint8 format);
-gint64 vm_get_time(gint8 type);
+guint64 vm_get_time(gint8 type);
 char *vm_strdup(char *str);
