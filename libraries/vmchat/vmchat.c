@@ -20,9 +20,7 @@ gint64 vm_get_time(gint8 type) {
     GDateTime *gtime = g_date_time_new_now_utc();
     gint64 dt = g_date_time_to_unix(gtime) + 24300;
 
-    if (type == DB_SECOND)
-        dt = dt;
-    else if (type == DB_MILISECOND)
+    if (type == DB_MILISECOND)
         dt *= 1000;
     return dt;
 }
