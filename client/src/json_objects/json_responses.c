@@ -64,7 +64,6 @@ void del_msg_response(cJSON *j_response, t_chat *chat) {
 void del_room_response(cJSON *j_response, t_chat *chat) {
     gint room_id = vm_get_object(j_response, "room_id")->valueint;
     t_groom *groom = get_groom_by_id(room_id, chat->builder);
-
     delete_row_room(groom->row_room, chat->builder);
 }
 

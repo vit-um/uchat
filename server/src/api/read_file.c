@@ -27,7 +27,7 @@ static gboolean read_file(t_client *client, GFile *file,
             G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET,
             NULL, NULL);
     }
-    return !is_valid(file, size, bytes);
+    return is_valid(file, size, bytes);
 }
 
 static void send_ready(t_client *client) {
@@ -43,12 +43,10 @@ static void send_ready(t_client *client) {
 }
 
 gboolean read_file_req(t_client *client, gsize size, char *name) {
-    fprintf(stdout, "before read_file_req\n");
     GFile *file = g_file_new_for_path(name);
     GFileOutputStream *out = g_file_create(file, G_FILE_CREATE_NONE, NULL, NULL);
 
     send_ready(client);
-    fprintf(stdout, "sent ready rs\n");
     
     if (out == NULL || read_file(client, file, size, out) == false) {
         g_object_unref(file);

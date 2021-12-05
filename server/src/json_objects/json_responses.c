@@ -137,9 +137,10 @@ void del_room_response(cJSON *j_request, t_client *client) {
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
 
-    if (get_member_type(client->info->database, client->user->user_id, room_id) == DB_ORDINARY) { ///put admin here instead
+    if (get_member_type(client->info->database, client->user->user_id, room_id) == DB_ORDINARY) {
         cJSON_AddNumberToObject(j_response, "token", RQ_DEL_ROOM);
         cJSON_AddNumberToObject(j_response, "room_id", room_id);
+        j_data = vm_message_calibration(j_response);
         vm_send_to_all(j_data, client, room_id);
         
         delete_room_by_id(client->info->database, room_id);
@@ -207,7 +208,7 @@ static gpointer upload_file_thread(gpointer data) {
     gchar *filename = NULL;
     gchar *j_data = NULL;
 
-    filename = g_strdup_printf("%s%llu%s%s%s",
+    filename = g_strdup_printf("%s%lu%s%s%s",
     VM_FILES_DIR, vm_get_time(DB_MICROSECOND), file->client->user->login,
     VM_FILE_DELIM, file->name);
 
@@ -255,11 +256,9 @@ void upload_file_response(cJSON *j_request, t_client *client) {
     client->user = get_user_by_token(client->info->database, auth_token);
 
     if (is_valid_member(client->info->database, client->user->user_id, room_id) == false) {
-        fprintf(stdout, "invalid member\n");
         return;
     }
 
-    fprintf(stdout, "is valid member\n");
     file->size = size;
     file->room_id = room_id;
     file->client = client;

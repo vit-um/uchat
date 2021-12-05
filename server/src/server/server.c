@@ -15,7 +15,6 @@ static void handle_request(GObject *source_object, GAsyncResult *res, gpointer u
     t_client *client = (t_client*)user_data;
 
     if (vm_is_connected(client->conn, client->out, client->in) == false) {
-        vm_logger(VM_LOG_FILE, "socket is not connected");
         mx_deinit_client(&client);
         return;
     }
@@ -77,7 +76,7 @@ gint main(gint argc, char **argv) {
 
     valid_argv(argc, argv[1]);
     vm_change_working_dir(CACHE);
-    // uchat_daemon();
+    uchat_daemon();
     info = mx_init_info();
     port = g_ascii_strtoll(argv[1], NULL, 10);
 

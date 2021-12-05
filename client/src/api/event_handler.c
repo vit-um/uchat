@@ -143,13 +143,13 @@ void connect_room_settings(t_chat *chat) {
     GObject *apply = gtk_builder_get_object(chat->builder, "btn_roomsett_apply");
     GObject *apply_room = gtk_builder_get_object(chat->builder, "btn_roomsett_apply_room");
     GObject *delete = gtk_builder_get_object(chat->builder, "btn_roomsett_delete");
-    GObject *clear = gtk_builder_get_object(chat->builder, "btn_clear_history");
+    GObject *clear_ = gtk_builder_get_object(chat->builder, "btn_clear_history");
 
     g_signal_connect(sett, "clicked", G_CALLBACK(set_room_sett), chat);
     g_signal_connect(apply, "clicked", G_CALLBACK(req_room_sett), chat);
     g_signal_connect(apply_room, "clicked", G_CALLBACK(req_room_name_sett), chat);
     g_signal_connect(delete, "clicked", G_CALLBACK(del_room_request), chat);
-    g_signal_connect(clear, "clicked", G_CALLBACK(clear_room_request), chat);
+    g_signal_connect(clear_, "clicked", G_CALLBACK(clear_room_request), chat);
 }
 
 void connect_profile_settings(t_chat *chat) {

@@ -23,7 +23,7 @@ void reset_room_message(t_groom *new_selected, GtkBuilder *builder) {
     t_groom *groom = get_selected_groom(builder, "listbox_rooms");
     if (groom && (!new_selected || new_selected->id != groom->id)) {
         reset_room_for_search(builder);
-        sig_stop_search_message(NULL, NULL, builder);  //GTK-error
+        sig_stop_search_message(NULL, NULL, builder); 
     }
 }
 

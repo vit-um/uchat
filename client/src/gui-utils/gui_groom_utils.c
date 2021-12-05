@@ -38,10 +38,8 @@ t_groom *get_selected_groom(GtkBuilder *builder, gchar *list_name) {
 gboolean is_same_groom(t_groom *groom, GtkBuilder *builder) {
     t_groom *current_groom = get_selected_groom(builder, "listbox_rooms");
 
-    if (!current_groom || !(current_groom->id == groom->id)) {
-        printf("--------------- is_same_groom --------\n");
+    if (!current_groom || !(current_groom->id == groom->id))
         return TRUE;
-    }
     else
         return FALSE;
 }

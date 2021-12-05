@@ -364,8 +364,13 @@ button label {
 /* Messages area styles */
 
 .stack_messages {
-	background-color: #1b1b1b;
+    background-color: #1b1b1b;
+    border-style: none;
 }
+.stack_messages listbox {
+    border-style: none;
+}
+
 .stack_messages > label {
     color: whitesmoke;
 }

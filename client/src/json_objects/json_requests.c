@@ -119,7 +119,7 @@ void join_to_room_request(GtkButton *btn, t_chat *chat) {
     gtk_list_box_unselect_all(groom->box_rooms);
     sig_stop_search_room(NULL, NULL, chat->builder);
 
-    fprintf(stdout, "joining to room %llu\n", groom->id);  //del
+    fprintf(stdout, "joining to room %lu\n", groom->id);  //del
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 
@@ -158,7 +158,7 @@ void search_msg_request(GtkSearchEntry *sentry, t_chat *chat) {
         j_data = vm_message_calibration(j_request);
         vm_send(chat->out, j_data);
 
-        widget_set_visibility_by_name(chat->builder, "stack_messege_rooms", false);
+        widget_set_visibility_by_name(chat->builder, "stack_message_rooms", false);
         widget_set_visibility_by_name(chat->builder, "scrlldwnd_found_msgs", true);
         widget_set_visibility_by_name(chat->builder, "label_found_messages", true);
         g_free(j_data);

@@ -16,14 +16,14 @@ void add_message_to_found(t_gmsg *gmsg, t_chat *chat) {
 void clear_found_msgs(GtkBuilder *builder) {
     GObject *box = (gtk_builder_get_object(builder, "listbox_found_msgs"));
     GtkListBoxRow *row = gtk_list_box_get_row_at_index(GTK_LIST_BOX(box), 0);
-
+    
     widget_set_visibility_by_name(builder, "label_search_nothing_msgs", FALSE);
     
     while (row) {
         gtk_widget_destroy(GTK_WIDGET(row));
         row = gtk_list_box_get_row_at_index(GTK_LIST_BOX(box), 0);
     }
-    widget_set_visibility_by_name(builder, "stack_messege_rooms", TRUE);
+    widget_set_visibility_by_name(builder, "stack_message_rooms", TRUE);
     widget_set_visibility_by_name(builder, "scrlldwnd_found_msgs", FALSE);
     widget_set_visibility_by_name(builder, "label_found_messages", FALSE);
 }

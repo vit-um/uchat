@@ -46,7 +46,7 @@ void select_room(GtkWidget *event_box, GdkEventButton *event, gpointer *user_dat
         if (!g_strcmp0(data->chat->login, data->groom->customer))
             widget_set_visibility(GTK_WIDGET(btn_room_sett), TRUE);
         else
-            widget_set_visibility(GTK_WIDGET(btn_room_sett), TRUE);   //del after set FALSE here
+            widget_set_visibility(GTK_WIDGET(btn_room_sett), FALSE);   //del after set FALSE here
     }
     (void)event;
     (void)user_data;

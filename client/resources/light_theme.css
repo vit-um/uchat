@@ -362,6 +362,10 @@ button label {
 
 .stack_messages {
 	background-color: #d6f0ff; 
+    border-style: none;
+}
+.stack_messages listbox {
+	border-style: none;
 }
 .stack_messages > label {
     color: #157ce1;
@@ -389,6 +393,7 @@ button label {
 .stack_messages list {
 	margin: 7px 38px 14px 38px;
 }
+
 
 /* Message styling */
 
