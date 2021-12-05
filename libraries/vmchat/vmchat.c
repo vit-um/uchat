@@ -16,14 +16,30 @@ char *vm_strdup(char *str) {
  * 
  * return time
  */
+
 guint64 vm_get_time(gint8 type) {
     GDateTime *gtime = g_date_time_new_now_utc();
-    guint64 dt = g_date_time_to_unix(gtime) + 24300;
+    gint64 dt = 0;
 
-    if (type == DB_MILISECOND)
-        dt *= 1000;
+    // dt = g_date_time_to_unix(gtime);
+    // dt *= 1000000; //del or correct?
+    dt = g_date_time_get_microsecond(gtime) + (g_date_time_get_seconds (gtime) * 1000000);
+    switch(type) {
+        case DB_SECOND: {
+            dt /= 1000000;
+            break;
+        }
+        case DB_MILISECOND: {
+            dt /= 1000;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
     return dt;
 }
+
 
 gchar *vm_get_time_in_str(gint64 miliseconds, gint8 format) {
     GDateTime *dt = g_date_time_new_from_unix_utc(miliseconds / 1000);
