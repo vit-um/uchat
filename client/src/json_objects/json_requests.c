@@ -119,7 +119,7 @@ void join_to_room_request(GtkButton *btn, t_chat *chat) {
     gtk_list_box_unselect_all(groom->box_rooms);
     sig_stop_search_room(NULL, NULL, chat->builder);
 
-    fprintf(stdout, "joining to room %lu\n", groom->id);  //del
+    //fprintf(stdout, "joining to room %luu\n", groom->id);  //del
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 
