@@ -18,12 +18,12 @@ char *vm_strdup(char *str) {
  */
 
 guint64 vm_get_time(gint8 type) {
-    GDateTime *gtime = g_date_time_new_now_utc();
+    GDateTime *gtime = g_date_time_new_now_local();
     gint64 dt = 0;
 
-    // dt = g_date_time_to_unix(gtime);
-    // dt *= 1000000; //del or correct?
-    dt = g_date_time_get_microsecond(gtime) + (g_date_time_get_seconds (gtime) * 1000000);
+    dt = g_date_time_to_unix(gtime);
+    // dt *= 1000000;
+    dt += g_date_time_get_microsecond(gtime);
     switch(type) {
         case DB_SECOND: {
             dt /= 1000000;
