@@ -8,7 +8,7 @@
 
 ## About the program
 
-[![Watch the video](https://i9.ytimg.com/vi_webp/nfWz2LhWfvM/mqdefault.webp?v=61ae0d42&sqp=CNSZuI0G&rs=AOn4CLAq7rQG4nKYbWiC5KCpXrSJPNoWPQ)](https://www.youtube.com/embed/nfWz2LhWfvM)
+[![Watch the video](client/resources/chat_demo.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
 
 **Messaging app written on C language, used tools: GLib, cJSON, sqlite3, GTK3 and Glade** 
 
