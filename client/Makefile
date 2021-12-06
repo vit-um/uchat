@@ -19,8 +19,6 @@ GTK_INC = -D_GNU_SOURCE `pkg-config --cflags gtk+-3.0`
 GTK_LIBS = -rdynamic `pkg-config --cflags --libs gtk+-3.0`
 LIB_PATH = -L../libraries/lib -lpthread -lsqlite3 -lpthread -ldl -lcjson -lvmchat
 
-# -lssl -lcrypto
-
 # flags to pass compiler
 WFLAGS = -Wall -Wextra -Werror -Wpedantic  #-Wno-deprecated
 LFLAGS = -Iinc -I../libraries/inc
