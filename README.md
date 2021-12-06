@@ -8,7 +8,7 @@
 
 ## About programm
 
-Messaging app written on C language, used tools: GLib, cJSON, sqlite3 and GTK  
+**Messaging app written on C language, used tools: GLib, cJSON, sqlite3, GTK3 and Glade** 
 
 - Support OS: Ubuntu, MacOS
 - Download code [here](.)
