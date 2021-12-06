@@ -16,9 +16,7 @@ Messaging app written on C language, used tools: GLib, cJSON, sqlite3 and GTK
 - Compilation in debug mode: make debug server && / || make debug client
 - Files for use: uchat, uchat_server
 
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nfWz2LhWfvM?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+[![Watch the video](Alf.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
 
 ## How to use:
 1. `git clone https://github.com/vit-um/uchat.git`
@@ -38,7 +36,7 @@ Messaging app written on C language, used tools: GLib, cJSON, sqlite3 and GTK
 <table>
 	<tr>
 		<td>
-<a href="https://sitcom.fandom.com/ru/wiki/Alf" target="_blank"><img src="Alf.jpg" height="300px"></a>
+<a><img src="Alf.jpg" height="300px"></a>
 		</td>
 		<td>
 <b>- You don’t like cats? <BR><BR>You just don't know how to cook them!</b>			
