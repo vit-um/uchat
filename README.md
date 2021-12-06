@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://ucode.world/en/" target="_blank">
-        <img src="ucode_logo_minimal.png?raw=true" height="100px">
+        <img src="client/resources/ucode_logo_minimal.png?raw=true" height="100px">
     </a>
     <h1 align="center">Ucode-Chat</h1>
     <br>
@@ -32,7 +32,7 @@
 <table>
 	<tr>
 		<td>
-<a><img src="Alf.jpg" height="300px"></a>
+<a><img src="client/resources/Alf.jpg" height="300px"></a>
 		</td>
 		<td>
 <b>- You don’t like cats? <BR><BR>You just don't know how to cook them!</b>			

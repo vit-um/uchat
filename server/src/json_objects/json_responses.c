@@ -205,9 +205,17 @@ static gpointer upload_file_thread(gpointer data) {
     gchar *filename = NULL;
     gchar *j_data = NULL;
 
+#if defined(__APPLE__)
     filename = g_strdup_printf("%s%llu%s%s%s",
     VM_FILES_DIR, vm_get_time(DB_MICROSECOND), file->client->user->login,
     VM_FILE_DELIM, file->name);
+#elif defined(__linux__)
+    filename = g_strdup_printf("%s%lu%s%s%s",
+    VM_FILES_DIR, vm_get_time(DB_MICROSECOND), file->client->user->login,
+    VM_FILE_DELIM, file->name);
+#else
+    #error "Unsupported OS"
+#endif
 
     if (read_file_req(file->client, file->size, filename) == true) {
         cJSON_AddNumberToObject(j_response, "room_id", file->room_id);
