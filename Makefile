@@ -21,8 +21,9 @@ all: ENV_VERIFICATION $(CJSON) $(SQL) $(VM) $(CLIENT) $(SERVER)
 
 ENV_VERIFICATION:
 	@echo ------------START ENV VERIFICATION-------------
-	@if ! dpkg -s pkg-config | grep Status | grep -q installed; then \
-		@apt-get install -y pkg-config; fi
+	if ! dpkg -s pkg-config | grep Status | grep -q installed; then \
+		echo ERROR: sudo package not installed!; \
+		sudo apt-get install -y pkg-config; fi
 	@echo -------------END ENV VERIFICATION---------------
 
 $(CJSON): $(CJSONDIRO)
