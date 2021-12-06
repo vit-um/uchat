@@ -16,7 +16,7 @@ Messaging app written on C language, used tools: GLib, cJSON, sqlite3 and GTK
 - Compilation in debug mode: make debug server && / || make debug client
 - Files for use: uchat, uchat_server
 
-[![Watch the video]](https://www.youtube.com/embed/nfWz2LhWfvM)
+[![Watch the video](https://i9.ytimg.com/vi/nfWz2LhWfvM/mq1.jpg?sqp=CLjot40G&rs=AOn4CLAcPiWLZrrZf6WGSbgrNpJo6orVtw)](https://www.youtube.com/embed/nfWz2LhWfvM)
 
 ## How to use:
 1. `git clone https://github.com/vit-um/uchat.git`
