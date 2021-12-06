@@ -6,17 +6,17 @@
     <br>
 </p>
 
-## About the program
-
-[![Watch the video](client/resources/chat_demo.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
-
 **Messaging app written on C language, used tools: GLib, cJSON, sqlite3, GTK3 and Glade** 
+
+## About the program
 
 - Support OS: Ubuntu, MacOS
 - Download code [here](.)
 - Default compilation mode: `make`
 - Compilation in debug mode: make debug server && / || make debug client
 - Files for use: uchat, uchat_server
+
+[![Watch the video](client/resources/chat_demo.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
 
 
 ## How to use:
