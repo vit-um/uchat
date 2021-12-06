@@ -22,8 +22,8 @@
 1. `git clone https://github.com/vit-um/uchat.git`
 2. `cd uchat`
 3. `make`
-4. Start server: `./uchat_server 3333`
-5. Start client: `./uchat localhost:3333`
+4. Start server: `./uchat_server <port>`
+5. Start client: `./uchat <ip address> <port>` or './uchat <hostname>:<port>'
 6. Sign up
 
 **Do you know who Alf is? How old is he and what does his name mean?😊**
