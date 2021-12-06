@@ -12,7 +12,7 @@
 
 - Support OS: Ubuntu, MacOS
 - Default compilation mode: `make`
-- Compilation in debug mode: make debug server && / || make debug client
+- Compilation in debug mode: `make debug server` or/and `make debug client`
 - Files for use: uchat, uchat_server
 
 [![Watch the video](client/resources/chat_demo.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
@@ -23,7 +23,7 @@
 2. `cd uchat`
 3. `make`
 4. Start server: `./uchat_server <port>`
-5. Start client: `./uchat <ip address> <port>` or './uchat <hostname>:<port>'
+5. Start client: `./uchat <ip address> <port>` or `./uchat <hostname>:<port>`
 6. Sign up
 
 **Do you know who Alf is? How old is he and what does his name mean?😊**
