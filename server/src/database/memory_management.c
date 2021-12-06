@@ -1,13 +1,32 @@
 #include "server.h"
 
+void free_db_user(t_db_user *user) {
+    if (user) {
+        if (user->name) {
+            g_free(user->name);
+        }
+        if (user->login) {
+            g_free(user->login);
+        }
+        if (user->pass) {
+            g_free(user->pass);
+        }
+        if (user->desc) {
+            g_free(user->desc);
+        }
+        free((void *)user);
+        user = NULL;
+    }
+}
+
 /*
- * Function: mx_free_room
+ * Function: free_room
  * -------------------------------
  * free struct t_db_room
  * 
  * room: structure t_db_room created with g_malloc
  */
-void mx_free_room(t_db_room **room) {
+void free_room(t_db_room **room) {
     if (!room || !*room)
         return;
     if ((*room)->room_name)
@@ -19,13 +38,13 @@ void mx_free_room(t_db_room **room) {
 }
 
 /*
- * Function: mx_free_message
+ * Function: free_message
  * -------------------------------
  * free struct t_db_message
  * 
  * message: structure t_db_message created with g_malloc
  */
-void mx_free_message(t_db_message **message) {
+void free_message(t_db_message **message) {
     if (!message || !*message)
         return;
     if ((*message)->message)

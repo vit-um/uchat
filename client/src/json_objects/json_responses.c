@@ -1,6 +1,3 @@
-//
-// Created by Максим Гринчак on 11/4/21.
-//
 #include "client.h"
 
 void clear_room_response(cJSON *j_response, t_chat *chat) {
@@ -134,8 +131,6 @@ void log_out_response(cJSON *j_response, t_chat *chat) {
         return;
     }
 
-    // mx_free((void**)&chat->auth_token);
-    // mx_free((void**)&chat->login);
     GtkListBox *box = GTK_LIST_BOX(gtk_builder_get_object(chat->builder, "listbox_rooms"));
     GtkListBoxRow *row = gtk_list_box_get_row_at_index(box, 0);
     start_main_window(chat);
@@ -145,7 +140,6 @@ void log_out_response(cJSON *j_response, t_chat *chat) {
     }
 
     clear_global_search(chat->builder);
-    //do not free auth_token - causes segfault
 }
 
 void new_messages_response(cJSON *j_response, t_chat *chat) {
@@ -153,10 +147,8 @@ void new_messages_response(cJSON *j_response, t_chat *chat) {
     gint size = cJSON_GetArraySize(msgs);
     cJSON *msg = NULL;
 
-    // fprintf(stdout, "msgs size: %d\n", size);
     for (gint i = size - 1; i >= 0; i--) {
         msg = cJSON_GetArrayItem(msgs, i);
-        // fprintf(stdout, "inserting: %s\n", vm_get_valuestring(msg, "msg"));
         send_message_response(msg, chat);
     }
 }

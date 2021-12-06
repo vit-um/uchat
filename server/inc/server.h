@@ -2,13 +2,13 @@
 
 #if defined(__APPLE__)
 #include <malloc/malloc.h>
-#define MX_MALLOC_SIZE(x) malloc_size(x)
+#define VM_MALLOC_SIZE(x) malloc_size(x)
 #elif defined(_WIN64) || defined(_WIN32)
 #include <malloc.h>
-#define MX_MALLOC_SIZE(x) _msize(x)
+#define VM_MALLOC_SIZE(x) _msize(x)
 #elif defined(__linux__)
 #include <malloc.h>
-#define MX_MALLOC_SIZE(x) malloc_usable_size(x)
+#define VM_MALLOC_SIZE(x) malloc_usable_size(x)
 #define SO_REUSEPORT 15
 #endif
 
@@ -43,8 +43,8 @@
 #define MAX_ROOM_LEN 100
 
 #define CACHE "server/cache"
-#define MX_REQUEST_PER_SECOND 20
-#define MX_DELAY (1000000 / MX_REQUEST_PER_SECOND)
+#define VM_REQUEST_PER_SECOND 20
+#define VM_DELAY (1000000 / VM_REQUEST_PER_SECOND)
 
 typedef struct s_send_helper {
     GHashTable *table;
@@ -61,7 +61,7 @@ typedef struct s_client {
     GDataOutputStream *out;
     GDataInputStream *in;
     GInputStream *in_s;
-    gchar *request;   //del    char *msg;
+    gchar *request;
     t_db_user *user;
     t_info *info;
     gboolean upload_file;
@@ -123,6 +123,7 @@ gboolean read_file_req(t_client *client, gsize size, char *name);
 void download_file_req(gchar *msg, t_client *client);
 
 ///utils
-t_info *mx_init_info(void);
-void mx_deinit_info(t_info **info);
-void mx_deinit_client(t_client **client);
+t_info *init_info(void);
+void deinit_info(t_info **info);
+void deinit_client(t_client **client);
+void free_db_user(t_db_user *user);

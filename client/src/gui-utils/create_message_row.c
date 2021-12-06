@@ -18,7 +18,7 @@ GtkWidget *msgcreate_eventbox() {
     return eventbox;
 }
 
-GtkWidget *mx_create_reg_message_row(t_gmsg *gmsg, gboolean is_own, t_chat *chat) {
+GtkWidget *create_reg_message_row(t_gmsg *gmsg, gboolean is_own, t_chat *chat) {
     GtkWidget *eventbox = msgcreate_eventbox();
     GtkWidget *box_main = msgcreate_box_main(eventbox, is_own);
 
@@ -26,10 +26,10 @@ GtkWidget *mx_create_reg_message_row(t_gmsg *gmsg, gboolean is_own, t_chat *chat
     return eventbox;
 }
 
-GtkWidget *mx_create_message_row(t_chat *chat, t_gmsg *gmsg) {
+GtkWidget *create_message_row(t_chat *chat, t_gmsg *gmsg) {
     gboolean is_own = !g_strcmp0(chat->login, gmsg->login);
     GtkWidget *eventbox = NULL;
 
-    eventbox = mx_create_reg_message_row(gmsg, is_own, chat);
+    eventbox = create_reg_message_row(gmsg, is_own, chat);
     return eventbox;
 }

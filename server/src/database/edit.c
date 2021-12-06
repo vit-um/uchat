@@ -77,7 +77,6 @@ void edit_message_by_id(sqlite3 *db, gint id, gchar *new) {
     rv = sqlite3_prepare_v2(db, "update messages set message = ?1 "
                                 "where message_id = ?2", -1,
                             &stmt, NULL);
-    fprintf(stdout, "updating msg rv: %d\n", rv);
     sqlite3_bind_text(stmt, 1, new, -1, SQLITE_STATIC);
     sqlite3_bind_int64(stmt, 2, id);
     sqlite3_step(stmt);
@@ -85,7 +84,7 @@ void edit_message_by_id(sqlite3 *db, gint id, gchar *new) {
 }
 
 /*
- * Function: mx_edit_type_member
+ * Function: edit_type_member
  * -------------------------------
  * changes permission of user in this room
  * 

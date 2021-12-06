@@ -1,12 +1,8 @@
-//
-// Created by Максим Гринчак on 10/29/21.
-//
-
 #include "server.h"
 #include "database.h"
 
 /*
- * Function: mx_get_text_message
+ * Function: get_text_message
  * -------------------------------
  * returns the message text from the messages tab
  * 
@@ -61,7 +57,7 @@ static void sqlite_bind_msg(sqlite3_stmt *stmt, t_db_message *message) {
 }
 
 /*
- * Function: mx_insert_message
+ * Function: insert_message
  * -------------------------------
  * makes an entry in the database in the messages table
  * in which enters data from the structure t_db_message
@@ -77,12 +73,10 @@ void insert_message_into_db(sqlite3 *db, t_db_message *message) {
 
     message->date = vm_get_time(DB_MILISECOND);
     message->status = DB_MSG_START;
-    fprintf(stdout, "inserting message: { %s }\n", message->message);
     rv = sqlite3_prepare_v2(db, "INSERT INTO MESSAGES(USER_ID, ROOM_ID, "
                            "DATE, MESSAGE, TYPE, FILE_SIZE, FILE_NAME, STATUS)"
                            "VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);",
                             -1, &stmt, NULL);
-    fprintf(stdout, "rv: %d\n", rv);
     sqlite_bind_msg(stmt, message);
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
@@ -110,7 +104,7 @@ t_db_room *get_room_by_id(sqlite3 *db, guint64 id) {
         room->room_name = strdup((const char*)sqlite3_column_text(stmt, 1));
         room->user_id = sqlite3_column_int64(stmt, 2);
         room->date = sqlite3_column_int64(stmt, 3);
-        room->desc = strdup(MX_J_STR((char*)sqlite3_column_text(stmt, 4)));
+        room->desc = strdup(VM_J_STR((char*)sqlite3_column_text(stmt, 4)));
         room->type = sqlite3_column_int(stmt, 5);
     }
     sqlite3_finalize(stmt);
@@ -156,13 +150,13 @@ cJSON *search_msgs_in_db(sqlite3 *db, gint room_id, gchar *str_search) {
         cJSON_AddItemToArray(messages, get_object_message(stmt));
     }
     g_free(str_search_join);
-    // mx_free((void**)&str_search);                    ///fix later
+    // free((void**)&str_search);                    ///fix later
     sqlite3_finalize(stmt);
     return messages;
 }
 
 /*
- * Function: mx_get_object_room
+ * Function: get_object_room
  * -------------------------------
  * creates a json object with room data
  * 
@@ -174,17 +168,17 @@ static cJSON *get_object_room(sqlite3_stmt *stmt) {
     cJSON *room = cJSON_CreateObject();
 
     cJSON_AddNumberToObject(room, "id", sqlite3_column_int64(stmt, 0));
-    cJSON_AddStringToObject(room, "name", MX_J_STR((char*)sqlite3_column_text(stmt, 1)));
+    cJSON_AddStringToObject(room, "name", VM_J_STR((char*)sqlite3_column_text(stmt, 1)));
     cJSON_AddNumberToObject(room, "user_id", sqlite3_column_int64(stmt, 2));
     cJSON_AddNumberToObject(room, "date", sqlite3_column_int64(stmt, 3));
-    cJSON_AddStringToObject(room, "desc", MX_J_STR((char*)sqlite3_column_text(stmt, 4)));
+    cJSON_AddStringToObject(room, "desc", VM_J_STR((char*)sqlite3_column_text(stmt, 4)));
     cJSON_AddNumberToObject(room, "type", sqlite3_column_int(stmt, 5));
 
     return room;
 }
 
 /*
- * Function: mx_get_rooms
+ * Function: get_rooms
  * -------------------------------
  * returns all user rooms where he can be active
  * rooms that have been created so far are not taken into account
@@ -214,7 +208,7 @@ cJSON *get_json_rooms(sqlite3 *db, guint64 date, guint64 user_id) {
 }
 
 /*
- * Function: mx_search_room
+ * Function: search_room
  * -------------------------------
  * finds and writes to json an array of room names whose name begins with 
  * str_search and to which this user belongs
@@ -241,7 +235,7 @@ cJSON *search_rooms_in_db(sqlite3 *db, gint user_id, gchar *str_search) {
         cJSON_AddItemToArray(rooms, get_object_room(stmt));
     }
     g_free(str_search_join);
-    // mx_free((void **)&str_search);           ///change this later
+    // free((void **)&str_search);           ///change this later
     sqlite3_finalize(stmt);
     return rooms;
 }
@@ -262,7 +256,7 @@ static t_db_user *get_user(sqlite3_stmt *stmt) {
         user->pass = strdup((const char*)sqlite3_column_text(stmt, 3));
         user->auth_token = strdup((const char*)sqlite3_column_text(stmt, 4));
         user->date = sqlite3_column_int(stmt, 5);
-        user->desc = strdup(MX_J_STR((char*)sqlite3_column_text(stmt, 6)));
+        user->desc = strdup(VM_J_STR((char*)sqlite3_column_text(stmt, 6)));
     }
     sqlite3_finalize(stmt);
     return user;
@@ -390,7 +384,7 @@ void insert_member_into_db(sqlite3 *db,
 }
 
 /*
- * Function: mx_insert_room_into_db
+ * Function: insert_room_into_db
  * -------------------------------
  * makes an entry in the database in the rooms table
  * in which enters data from the structure t_db_room
@@ -410,9 +404,6 @@ static void sqlite_bind_room(sqlite3_stmt *stmt, t_db_room *room) {
 void insert_room_into_db(sqlite3 *db, t_db_room *room) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
-
-    //fprintf(stdout, "inserting new room: { %s; %d; %d; %s; %d }\n",
-    // room->room_name, room->user_id, room->date, room->desc, room->type);
 
     room->date = vm_get_time(DB_MILISECOND);
     rv = sqlite3_prepare_v2(db, "INSERT INTO ROOMS(NAME, USER_ID, DATE, "

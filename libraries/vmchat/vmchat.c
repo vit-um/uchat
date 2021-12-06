@@ -16,13 +16,12 @@ char *vm_strdup(char *str) {
  * 
  * return time
  */
-
 guint64 vm_get_time(gint8 type) {
     GDateTime *gtime = g_date_time_new_now_local();
     gint64 dt = 0;
 
     dt = g_date_time_to_unix(gtime);
-    // dt *= 1000000;
+    //dt *= 1000000; //del or correct?
     dt += g_date_time_get_microsecond(gtime);
     switch(type) {
         case DB_SECOND: {
@@ -40,12 +39,11 @@ guint64 vm_get_time(gint8 type) {
     return dt;
 }
 
-
-gchar *vm_get_time_in_str(gint64 miliseconds, gint8 format) {
+gchar *vm_get_time_in_str(guint64 miliseconds, gint8 format) {
     GDateTime *dt = g_date_time_new_from_unix_utc(miliseconds / 1000);
     GDateTime *new = g_date_time_to_local(dt);
 
-    if (format == MX_TIME_SHORT)
+    if (format == VM_TIME_SHORT)
         return g_date_time_format(new, "%H:%M");
     else
         return g_date_time_format(new, "%d.%m.%Y    %H:%M:%S");
@@ -148,7 +146,7 @@ void vm_logger(char *file_name, char *error) {
     gchar *date = NULL;
     GDateTime *dt = g_date_time_new_now_local();
     date = g_date_time_format(dt, "%e.%m.%Y %T");
-    fprintf(stderr, "log: %s\n", error);
+ //   fprintf(stderr, "log: %s\n", error);
     fprintf(fd, "d:%s\t", date);
     fprintf(fd, "pid:%d\t", getpid());
     fprintf(fd, "m:'%s'\n", error);

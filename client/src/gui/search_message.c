@@ -2,7 +2,7 @@
 
 void add_message_to_found(t_gmsg *gmsg, t_chat *chat) {
     GtkWidget *row = gtk_list_box_row_new();
-    GtkWidget *event = mx_create_message_row(chat, gmsg);
+    GtkWidget *event = create_message_row(chat, gmsg);
     GObject *box = gtk_builder_get_object(chat->builder, "listbox_found_msgs");
 
     gtk_widget_set_can_focus(row, FALSE);

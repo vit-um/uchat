@@ -4,7 +4,7 @@ static void file_read(gsize size, gchar *name, GInputStream *in) {
     gchar *basename = g_path_get_basename(name);
     gchar *filename = g_strjoin("", VM_FILES_DIR, basename, NULL);
 
-    mx_file_read(size, filename, in);
+    vm_file_read(size, filename, in);
     g_free(filename);
 }
 
@@ -24,7 +24,7 @@ static void file_ready(GObject *source_object, GAsyncResult *res, gpointer user_
         cJSON_Delete(response);
         return;
     }
-    mx_send_ready(user_data);
+    send_ready(user_data);
     file_read(size->valuedouble, name->valuestring, in_s);
     g_io_stream_close(G_IO_STREAM(user_data), NULL, NULL);
 }

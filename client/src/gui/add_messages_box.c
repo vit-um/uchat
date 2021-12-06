@@ -52,7 +52,7 @@ static void box_messages_reached(GtkScrolledWindow *scroll, GtkPositionType pos,
 /*
  * Show "Go Down" butoon when user go up
  */
-static void mx_show_go_down(GtkAdjustment *adj, GtkBuilder *builder) {
+static void show_go_down(GtkAdjustment *adj, GtkBuilder *builder) {
     GObject *go_down = gtk_builder_get_object(builder, "btn_go_down");
     gdouble upper = gtk_adjustment_get_upper(adj);
     gdouble value = gtk_adjustment_get_value(adj);
@@ -66,7 +66,7 @@ static void mx_show_go_down(GtkAdjustment *adj, GtkBuilder *builder) {
 /*
  * Do GtkScrolledWindow autoscroll to down by name or pointer
  */
-static void mx_scroll_to_end(GtkAdjustment *adj, gpointer user_data) {
+static void scroll_to_end(GtkAdjustment *adj, gpointer user_data) {
     static GtkAdjustment *last_adj = 0;
     static gdouble last_upper = 0;
     gdouble upper = gtk_adjustment_get_upper(adj);
@@ -85,7 +85,7 @@ static void mx_scroll_to_end(GtkAdjustment *adj, gpointer user_data) {
     (void)user_data;
 }
 
-static void mx_scrlldwnd_connect(gchar *name,
+static void scrlldwnd_connect(gchar *name,
                                  GtkWidget *scroll,
                                  GtkBuilder *builder,
                                  t_groom *room) {
@@ -99,12 +99,12 @@ static void mx_scrlldwnd_connect(gchar *name,
         scrlldwnd = scroll;
     }
     adj = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrlldwnd));
-   g_signal_connect(adj, "changed", G_CALLBACK(mx_scroll_to_end), room);
-   g_signal_connect(adj, "changed", G_CALLBACK(mx_show_go_down), builder);
-   g_signal_connect(adj, "value-changed", G_CALLBACK(mx_show_go_down), builder);
+   g_signal_connect(adj, "changed", G_CALLBACK(scroll_to_end), room);
+   g_signal_connect(adj, "changed", G_CALLBACK(show_go_down), builder);
+   g_signal_connect(adj, "value-changed", G_CALLBACK(show_go_down), builder);
 }
 
-static gchar *mx_msgpage_name(gint id) {
+static gchar *msgpage_name(gint id) {
     return g_strdup_printf("%s_%d", "msgpage_", id);
 }
 
@@ -125,10 +125,10 @@ void add_messages_box(t_groom *room, t_chat *chat) {
     room->box_messages = GTK_LIST_BOX(box);
     gtk_list_box_set_selection_mode(room->box_messages, GTK_SELECTION_MULTIPLE);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    gtk_stack_add_named(GTK_STACK(stack), scroll, mx_msgpage_name(room->id));
+    gtk_stack_add_named(GTK_STACK(stack), scroll, msgpage_name(room->id));
     room->stack_msg = GTK_STACK(stack);
     room->page = GTK_SCROLLED_WINDOW(scroll);
     gtk_widget_show_all(scroll);
-    mx_scrlldwnd_connect(NULL, scroll, chat->builder, room);
+    scrlldwnd_connect(NULL, scroll, chat->builder, room);
     g_signal_connect(scroll, "edge-reached", G_CALLBACK(box_messages_reached), chat);
 }

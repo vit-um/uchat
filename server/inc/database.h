@@ -1,7 +1,3 @@
-//
-// Created by Максим Гринчак on 10/29/21.
-//
-
 #pragma once
 
 #include "server.h"
@@ -46,7 +42,6 @@ typedef struct s_db_room {
     gchar *desc;
 }              t_db_room;
 
-//void init_client();
 cJSON *get_json_rooms(sqlite3 *db, guint64 date, guint64 user_id);
 cJSON *get_json_members(sqlite3 *db, gint room_id);
 void insert_room_into_db(sqlite3 *db, t_db_room *room);

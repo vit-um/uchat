@@ -55,18 +55,18 @@
 /*
  * Formatting characters
  */
-#define MX_FT_SCRATCH "~~"
-#define MX_FT_BOLD "**"
-#define MX_FT_IMPORTANT "``"
-#define MX_FT_ITALIC "##"
-#define MX_FT_UNDER "__"
+#define VM_FT_SCRATCH "~~"
+#define VM_FT_BOLD "**"
+#define VM_FT_IMPORTANT "``"
+#define VM_FT_ITALIC "##"
+#define VM_FT_UNDER "__"
 
 /*
  * Formatting spans
  */
-#define MX_OP_SCRATCH "<span strikethrough=\"true\">%s</span>"
-#define MX_OP_BOLD "<span font_weight=\"bold\">%s</span>"
-#define MX_OP_IMPORTANT "<span background=\"#FF698C7F\">%s</span>"
-#define MX_OP_ITALIC "<span font_style=\"italic\">%s</span>"
-#define MX_OP_UNDER "<span underline=\"single\">%s</span>"
-#define MX_CLOSE_SPAN "</span>"
+#define VM_OP_SCRATCH "<span strikethrough=\"true\">%s</span>"
+#define VM_OP_BOLD "<span font_weight=\"bold\">%s</span>"
+#define VM_OP_IMPORTANT "<span background=\"#FF698C7F\">%s</span>"
+#define VM_OP_ITALIC "<span font_style=\"italic\">%s</span>"
+#define VM_OP_UNDER "<span underline=\"single\">%s</span>"
+#define VM_CLOSE_SPAN "</span>"

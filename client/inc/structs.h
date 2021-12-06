@@ -1,6 +1,3 @@
-//
-// Created by Максим Гринчак on 11/9/21.
-//
 #pragma once
 #include "client.h"
 #include "defines.h"

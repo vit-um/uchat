@@ -16,10 +16,10 @@ cJSON *get_object_message(sqlite3_stmt *stmt) {
     cJSON_AddNumberToObject(msg, "user_id", sqlite3_column_int64(stmt, 1));
     cJSON_AddNumberToObject(msg, "room_id", sqlite3_column_int64(stmt, 2));
     cJSON_AddNumberToObject(msg, "date", sqlite3_column_int64(stmt, 3));
-    cJSON_AddStringToObject(msg, "msg", MX_J_STR((char*)sqlite3_column_text(stmt, 4)));
+    cJSON_AddStringToObject(msg, "msg", VM_J_STR((char*)sqlite3_column_text(stmt, 4)));
     cJSON_AddNumberToObject(msg, "msg_type", sqlite3_column_int(stmt, 5));
     cJSON_AddNumberToObject(msg, "file_size", sqlite3_column_int(stmt, 6));
-    cJSON_AddStringToObject(msg, "file_name", MX_J_STR((char*)sqlite3_column_text(stmt, 7)));
+    cJSON_AddStringToObject(msg, "file_name", VM_J_STR((char*)sqlite3_column_text(stmt, 7)));
     cJSON_AddNumberToObject(msg, "status", sqlite3_column_int(stmt, 8));
     return msg;
 }

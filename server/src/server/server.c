@@ -15,7 +15,7 @@ static void handle_request(GObject *source_object, GAsyncResult *res, gpointer u
     t_client *client = (t_client*)user_data;
 
     if (vm_is_connected(client->conn, client->out, client->in) == false) {
-        mx_deinit_client(&client);
+        deinit_client(&client);
         return;
     }
 
@@ -62,7 +62,6 @@ static gboolean incoming(GSocketService *service,
 
 static void valid_argv(gint argc, char *port) {
     if (argc != 2 || strlen(port) != 4 || !atoi(port)) {
-        //fprintf(stderr, "Usage: ./uchat_server <port>\n");
         exit(1);
     }
 }
@@ -77,7 +76,7 @@ gint main(gint argc, char **argv) {
     valid_argv(argc, argv[1]);
     vm_change_working_dir(CACHE);
     uchat_daemon();
-    info = mx_init_info();
+    info = init_info();
     port = g_ascii_strtoll(argv[1], NULL, 10);
 
     if (!g_socket_listener_add_inet_port((GSocketListener*)service, port, NULL, NULL)) {

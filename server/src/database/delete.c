@@ -20,7 +20,7 @@ void delete_all_msgs(sqlite3 *db, gint room_id) {
 }
 
 /*
- * Function: mx_delete_message_by_id
+ * Function: delete_message_by_id
  * -------------------------------
  * delete message
  * 

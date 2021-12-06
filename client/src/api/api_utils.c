@@ -77,7 +77,6 @@ void insert_room(cJSON *j_room, t_chat *chat) {
     cJSON_AddStringToObject(room_dup, "valid", "true");
     cJSON_AddStringToObject(room_dup, "err_msg", "valid roomname");
     new_room_response(room_dup, chat);
-    fprintf(stdout, "getting new msgs for %d\n", room_id);
     new_messages_request(chat->out, 0, room_id);
 
     cJSON_Delete(room_dup);

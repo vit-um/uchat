@@ -21,7 +21,7 @@ t_db_message *get_db_message(cJSON *j_request) {
 }
 
 /*
- * Function: mx_parse_json_user
+ * Function: parse_json_user
  * -------------------------------
  * writes data from the json object to the structure t_db_user
  * 

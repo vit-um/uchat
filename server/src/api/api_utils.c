@@ -24,9 +24,6 @@ gint8 get_member_type(sqlite3 *db, gint user_id, gint room_id) {
         perm_user = sqlite3_column_int(stmt, 0);
     }
     sqlite3_finalize(stmt);
-    if (perm_user == DB_BANNED) {
-        fprintf(stdout, "banned member\n");
-    }
     return perm_user;
 }
 
@@ -51,9 +48,6 @@ gboolean is_msg_owner(sqlite3 *db, gint user_id, gint msg_id) {
     sqlite3_bind_int64(stmt, 2, user_id);
     if ((rv = sqlite3_step(stmt)) == SQLITE_ROW) {
         is_owner = true;
-    }
-    if (is_owner == false) {
-        fprintf(stdout, "not msg owner\n");
     }
     sqlite3_finalize(stmt);
     return is_owner;
@@ -83,7 +77,6 @@ gboolean is_member(sqlite3 *db, gint user_id, gint room_id) {
         return true;
     }
     sqlite3_finalize(stmt);
-    fprintf(stdout, "not member\n");
     return false;
 }
 

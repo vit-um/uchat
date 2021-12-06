@@ -1,6 +1,6 @@
 #include "client.h"
 
-void mx_msgcreate_label_login(GtkWidget *box_main, t_gmsg *gmsg) {
+void msgcreate_label_login(GtkWidget *box_main, t_gmsg *gmsg) {
     GtkWidget *label_login = gtk_label_new(gmsg->login);
 
     widget_set_class(label_login, "sender_login");
@@ -8,7 +8,7 @@ void mx_msgcreate_label_login(GtkWidget *box_main, t_gmsg *gmsg) {
     gtk_widget_set_halign(label_login, GTK_ALIGN_START);
 }
 
-void mx_msgcreate_img_sticker(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
+void msgcreate_img_sticker(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
     GtkWidget *sticker = gtk_image_new_from_icon_name(gmsg->msg,GTK_ICON_SIZE_DIALOG);
 
     gtk_image_set_pixel_size(GTK_IMAGE(sticker), 128);
@@ -20,7 +20,7 @@ void mx_msgcreate_img_sticker(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own
     }
 }
 
-void mx_msgcreate_label_text(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
+void msgcreate_label_text(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
     GtkWidget *label_text = gtk_label_new(NULL);
 
     if (is_own) {
@@ -38,10 +38,10 @@ void mx_msgcreate_label_text(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own)
     g_object_ref(label_text);
 }
 
-void mx_msgcreate_label_time(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
+void msgcreate_label_time(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own) {
     GtkWidget *label_time = gtk_label_new(NULL);
-    gchar *short_time = vm_get_time_in_str(gmsg->date, MX_TIME_SHORT);
-    gchar *long_time = vm_get_time_in_str(gmsg->date, MX_TIME_LONG);
+    gchar *short_time = vm_get_time_in_str(gmsg->date, VM_TIME_SHORT);
+    gchar *long_time = vm_get_time_in_str(gmsg->date, VM_TIME_LONG);
 
     if (is_own) {
         gtk_widget_set_halign(label_time, GTK_ALIGN_END);

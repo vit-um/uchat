@@ -43,10 +43,12 @@ void select_room(GtkWidget *event_box, GdkEventButton *event, gpointer *user_dat
         set_current_room_sett(data->chat->builder);
         set_room_widgets_visibility(data->chat->builder, TRUE);
         widget_remove_class(GTK_WIDGET(data->groom->label_name),"has-messages");
-        if (!g_strcmp0(data->chat->login, data->groom->customer))
+        if (!g_strcmp0(data->chat->login, data->groom->customer)) {
             widget_set_visibility(GTK_WIDGET(btn_room_sett), TRUE);
-        else
+        }
+        else {
             widget_set_visibility(GTK_WIDGET(btn_room_sett), FALSE);   //del after set FALSE here
+        }
     }
     (void)event;
     (void)user_data;

@@ -28,7 +28,6 @@ static void send_file(gchar *j_data, GFile *file, t_chat *chat) {
     vm_send(d_out, j_data);
     g_free(j_data);
     if (is_server_ready(conn)) {
-        fprintf(stdout, "server is ready\n");
         g_output_stream_splice(out, G_INPUT_STREAM(file_in),
         G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE, NULL, NULL);
     }
@@ -51,9 +50,9 @@ void upload_file_request(gchar *path, gint room_id, t_chat *chat) {
     gchar *j_data = NULL;
 
     cJSON_AddNumberToObject(j_request, "token", RQ_UPLOAD_FILE);
-    cJSON_AddStringToObject(j_request, "name", MX_J_STR(g_file_info_get_name(info)));
+    cJSON_AddStringToObject(j_request, "name", VM_J_STR(g_file_info_get_name(info)));
     cJSON_AddNumberToObject(j_request, "size", g_file_info_get_size(info));
-    cJSON_AddStringToObject(j_request, "auth_token", MX_J_STR(chat->auth_token));
+    cJSON_AddStringToObject(j_request, "auth_token", VM_J_STR(chat->auth_token));
     cJSON_AddNumberToObject(j_request, "room_id", room_id);
     j_data = vm_message_calibration(j_request);
 

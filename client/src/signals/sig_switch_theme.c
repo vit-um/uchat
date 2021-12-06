@@ -2,19 +2,19 @@
 
 static void set_light_theme(t_chat *chat) {
     g_file_set_contents(THEME_FILE, "light", -1, NULL);
-    mx_css_connect(LIGHT_THEME, chat);
+    css_connect(LIGHT_THEME, chat);
     change_theme_icon(chat, "dark-theme");
 }
 
 static void enable_opposite_theme(gchar *current_name, t_chat *chat) {
     if (!g_strcmp0("dark", current_name)) {
         g_file_set_contents(THEME_FILE, "light", -1, NULL);
-        mx_css_connect(LIGHT_THEME, chat);
+        css_connect(LIGHT_THEME, chat);
         change_theme_icon(chat, "dark-theme");
     }
     else {
         g_file_set_contents(THEME_FILE, "dark", -1, NULL);
-        mx_css_connect(DARK_THEME, chat);
+        css_connect(DARK_THEME, chat);
         change_theme_icon(chat, "light-theme");
     }
 }

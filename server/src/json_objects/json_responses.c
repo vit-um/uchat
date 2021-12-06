@@ -1,6 +1,3 @@
-//
-// Created by Максим Гринчак on 11/4/21.
-//
 #include "server.h"
 
 void clear_room_response(cJSON *j_request, t_client *client) {
@@ -213,7 +210,6 @@ static gpointer upload_file_thread(gpointer data) {
     VM_FILE_DELIM, file->name);
 
     if (read_file_req(file->client, file->size, filename) == true) {
-        ///performing some stuff with msg
         cJSON_AddNumberToObject(j_response, "room_id", file->room_id);
         cJSON_AddStringToObject(j_response, "msg", filename);
         cJSON_AddNumberToObject(j_response, "msg_type", DB_FILE_MSG);
@@ -224,7 +220,7 @@ static gpointer upload_file_thread(gpointer data) {
 
         j_response = cJSON_CreateObject();
         cJSON_AddNumberToObject(j_response, "token", RQ_MSG);
-        cJSON_AddStringToObject(j_response, "msg", MX_J_STR(msg->message));
+        cJSON_AddStringToObject(j_response, "msg", VM_J_STR(msg->message));
         cJSON_AddNumberToObject(j_response, "room_id", msg->room_id);
         cJSON_AddNumberToObject(j_response, "date", msg->date);
         cJSON_AddNumberToObject(j_response, "msg_id", msg->message_id);
@@ -281,11 +277,11 @@ void join_to_room_response(cJSON *j_request, t_client *client) {
         ///send response to the client that sent the request
         db_room = get_room_by_id(client->info->database, room_id);
         cJSON_AddNumberToObject(j_response, "token", RQ_JOIN_ROOM);
-        cJSON_AddStringToObject(j_response, "name", MX_J_STR(db_room->room_name));
+        cJSON_AddStringToObject(j_response, "name", VM_J_STR(db_room->room_name));
         cJSON_AddNumberToObject(j_response, "user_id", db_room->user_id);
         cJSON_AddNumberToObject(j_response, "id", db_room->room_id);
         cJSON_AddNumberToObject(j_response, "date", db_room->date);
-        cJSON_AddStringToObject(j_response, "desc", MX_J_STR(db_room->desc));
+        cJSON_AddStringToObject(j_response, "desc", VM_J_STR(db_room->desc));
         cJSON_AddStringToObject(j_response, "valid", "true");
         cJSON_AddStringToObject(j_response, "err_msg", "valid roomname");
         j_data = vm_message_calibration(j_response);
@@ -361,12 +357,10 @@ void log_out_response(cJSON *j_request, t_client *client) {
     }
 
     cJSON_AddNumberToObject(j_response, "token", RQ_LOG_OUT);
-    cJSON_AddStringToObject(j_response, "auth_token", MX_J_STR(auth_token));
+    cJSON_AddStringToObject(j_response, "auth_token", VM_J_STR(auth_token));
     j_data = vm_message_calibration(j_response);
     vm_send(client->out, j_data);
 
-    
-    fprintf(stdout, "removing user: {%s}\n", client->user->login);
     g_hash_table_remove(client->info->users, client->user->login);
     cJSON_Delete(j_response);
     g_free(j_data);
@@ -447,7 +441,7 @@ void send_message_response(cJSON *j_request, t_client *client) {
         insert_message_into_db(client->info->database, msg);
 
         cJSON_AddNumberToObject(j_response, "token", RQ_MSG);
-        cJSON_AddStringToObject(j_response, "msg", MX_J_STR(msg->message));
+        cJSON_AddStringToObject(j_response, "msg", VM_J_STR(msg->message));
         cJSON_AddNumberToObject(j_response, "room_id", msg->room_id);
         cJSON_AddNumberToObject(j_response, "date", msg->date);
         cJSON_AddNumberToObject(j_response, "msg_id", msg->message_id);
@@ -456,7 +450,6 @@ void send_message_response(cJSON *j_request, t_client *client) {
 
         j_data = vm_message_calibration(j_response);
         vm_send_to_all(j_data, client, msg->room_id);
-        ///could put some request here for achieving the BIG IDEA///
         g_free(j_data);
     }
 
@@ -486,19 +479,17 @@ void new_room_response(cJSON *j_request, t_client *client) {
     gchar *j_data = NULL;
 
     if (is_valid_room_name(room->room_name)) {
-        // //fprintf(stdout, "user_id before new room: %d\n", client->user->user_id);
         room->user_id = client->user->user_id;
         insert_room_into_db(client->info->database, room);
-        // //fprintf(stdout, "user_id after new room: %d\n", client->user->user_id);
         ///form a cJSON response
         cJSON_AddNumberToObject(j_response, "token", RQ_NEW_ROOM);
         cJSON_AddNumberToObject(j_response, "type", RQ_JOIN_ROOM);
         cJSON_AddStringToObject(j_response, "valid", "true");
-        cJSON_AddStringToObject(j_response, "name", MX_J_STR(room->room_name));
+        cJSON_AddStringToObject(j_response, "name", VM_J_STR(room->room_name));
         cJSON_AddNumberToObject(j_response, "user_id", room->user_id);
         cJSON_AddNumberToObject(j_response, "id", room->room_id);
         cJSON_AddNumberToObject(j_response, "date", room->date);
-        cJSON_AddStringToObject(j_response, "desc", MX_J_STR(room->desc));
+        cJSON_AddStringToObject(j_response, "desc", VM_J_STR(room->desc));
         cJSON_AddStringToObject(j_response, "err_msg", "valid roomname");
     } else {
         cJSON_AddNumberToObject(j_response, "token", RQ_NEW_ROOM);
@@ -545,7 +536,7 @@ void sign_in_response(cJSON *j_request, t_client *client) {
         valid_status = "false";
         err_msg = "user not found";
     }
-    else if (g_strcmp0(check->pass, user->pass)) {
+    else if (g_strcmp0(check->pass, client->user->pass)) {
         valid_status = "false";
         err_msg = "invalid password";
     }
@@ -561,10 +552,10 @@ void sign_in_response(cJSON *j_request, t_client *client) {
     }
 
     cJSON_AddNumberToObject(j_response, "token", RQ_SIGN_IN);
-    cJSON_AddStringToObject(j_response, "auth_token", MX_J_STR(client->user->auth_token));
-    cJSON_AddStringToObject(j_response, "login", MX_J_STR(client->user->login));
-    cJSON_AddStringToObject(j_response, "desc", MX_J_STR(client->user->desc));
-    cJSON_AddStringToObject(j_response, "name", MX_J_STR(client->user->name));
+    cJSON_AddStringToObject(j_response, "auth_token", VM_J_STR(client->user->auth_token));
+    cJSON_AddStringToObject(j_response, "login", VM_J_STR(client->user->login));
+    cJSON_AddStringToObject(j_response, "desc", VM_J_STR(client->user->desc));
+    cJSON_AddStringToObject(j_response, "name", VM_J_STR(client->user->name));
     cJSON_AddStringToObject(j_response, "valid", valid_status);
     cJSON_AddStringToObject(j_response, "err_msg", err_msg);
 
@@ -572,7 +563,6 @@ void sign_in_response(cJSON *j_request, t_client *client) {
     vm_send(client->out, j_data);
 
     g_free(j_data);
-    // free_user(&check);                           !!!!!!!!!caused deletion of client->user
     cJSON_Delete(j_response);
 }
 
@@ -587,6 +577,7 @@ void sign_up_response(cJSON *j_request, t_client *client) {
         gchar *j_data = vm_message_calibration(j_response);
         vm_send(client->out, j_data);
         g_free(j_data);
+        free_db_user(user);
     }
     else {
         client->user = user;

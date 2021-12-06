@@ -19,12 +19,12 @@
 #define VM_FILE_DELIM "__"
 
 //transfer to our protocol lib
-#define MX_J_STR(m) (m) ? (m) : "(null)"
+#define VM_J_STR(m) (m) ? (m) : "(null)"
 #define MAX_MESSAGE 800
 #define MAX_DESC 40
 #define MAX_NAME 20
-#define MX_TIME_SHORT 0
-#define MX_TIME_LONG 1
+#define VM_TIME_SHORT 0
+#define VM_TIME_LONG 1
 #define VM_MAX_ROOM_NAME 100
 
 /* MESSAGE_STATUS
@@ -137,6 +137,6 @@ gssize vm_send(GDataOutputStream *out_stream, gchar *str);
 t_request_type vm_get_token(cJSON *j_object);
 gchar *vm_get_valuestring(cJSON *j_object, gchar *key);
 cJSON *vm_get_object(cJSON *j_object, gchar *key);
-gchar *vm_get_time_in_str(gint64 miliseconds, gint8 format);
+gchar *vm_get_time_in_str(guint64 miliseconds, gint8 format);
 guint64 vm_get_time(gint8 type);
 char *vm_strdup(char *str);

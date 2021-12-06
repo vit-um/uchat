@@ -22,7 +22,7 @@ void edit_room_desc_request(GDataOutputStream *out, gint room_id, gchar *new_des
 
     cJSON_AddNumberToObject(j_request, "token", RQ_UPD_ROOM_DESC);
     cJSON_AddNumberToObject(j_request, "room_id", room_id);
-    cJSON_AddStringToObject(j_request, "desc", MX_J_STR(new_desc));
+    cJSON_AddStringToObject(j_request, "desc", VM_J_STR(new_desc));
     j_data = vm_message_calibration(j_request);
     vm_send(out, j_data);
 
@@ -36,7 +36,7 @@ void edit_room_name_request(GDataOutputStream *out, gint room_id, gchar *new_nam
 
     cJSON_AddNumberToObject(j_request, "token", RQ_UPD_ROOM_NAME);
     cJSON_AddNumberToObject(j_request, "room_id", room_id);
-    cJSON_AddStringToObject(j_request, "room_name", MX_J_STR(new_name));
+    cJSON_AddStringToObject(j_request, "room_name", VM_J_STR(new_name));
     j_data = vm_message_calibration(j_request);
     vm_send(out, j_data);
 
@@ -79,7 +79,7 @@ void ban_member_request(GObject *btn, t_chat *chat) {
     t_groom *groom = get_selected_groom(chat->builder, "listbox_rooms");
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
-    guint64 user_id = (guint64)g_object_get_data(btn, "member_id");
+    gint user_id = (gint)g_object_get_data(btn, "member_id");
 
     cJSON_AddNumberToObject(j_request, "token", RQ_BAN_MEMBER);
     cJSON_AddNumberToObject(j_request, "room_id", groom->id);
@@ -119,7 +119,6 @@ void join_to_room_request(GtkButton *btn, t_chat *chat) {
     gtk_list_box_unselect_all(groom->box_rooms);
     sig_stop_search_room(NULL, NULL, chat->builder);
 
-    //fprintf(stdout, "joining to room %luu\n", groom->id);  //del
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 
@@ -153,7 +152,7 @@ void search_msg_request(GtkSearchEntry *sentry, t_chat *chat) {
         t_groom *groom = get_selected_groom(chat->builder, "listbox_rooms");
 
         cJSON_AddNumberToObject(j_request, "token", RQ_SEARCH_MSG);
-        cJSON_AddStringToObject(j_request, "search_msg", MX_J_STR(search_msg));
+        cJSON_AddStringToObject(j_request, "search_msg", VM_J_STR(search_msg));
         cJSON_AddNumberToObject(j_request, "room_id", groom->id);
         j_data = vm_message_calibration(j_request);
         vm_send(chat->out, j_data);
@@ -181,7 +180,7 @@ void search_room_request(GtkSearchEntry *sentry, t_chat *chat) {
     else {
         search_local_rooms(chat->builder, filter_data);
         cJSON_AddNumberToObject(j_request, "token", RQ_SEARCH_CH);
-        cJSON_AddStringToObject(j_request, "search_name", MX_J_STR(search_name));
+        cJSON_AddStringToObject(j_request, "search_name", VM_J_STR(search_name));
         j_data = vm_message_calibration(j_request);
         vm_send(chat->out, j_data);
         g_free(j_data);
@@ -200,7 +199,7 @@ void send_sticker_request(GtkButton *btn, t_chat *chat) {
     gtk_image_get_icon_name(image, (const gchar**)&sticker, NULL);
 
     cJSON_AddNumberToObject(j_request, "token", RQ_MSG);
-    cJSON_AddStringToObject(j_request, "msg", MX_J_STR(sticker));
+    cJSON_AddStringToObject(j_request, "msg", VM_J_STR(sticker));
     cJSON_AddNumberToObject(j_request, "room_id", groom->id);
     cJSON_AddNumberToObject(j_request, "msg_type", DB_STICKER);
     j_data = vm_message_calibration(j_request);
@@ -213,7 +212,7 @@ void send_sticker_request(GtkButton *btn, t_chat *chat) {
 
 void get_member_info_request(GObject *popup, t_chat *chat) {
     cJSON *j_request = cJSON_CreateObject();
-    guint64 user_id = (guint64) g_object_get_data(popup, "member_id");
+    gint user_id = (gint) g_object_get_data(popup, "member_id");
     gchar *j_data = NULL;
 
     cJSON_AddNumberToObject(j_request, "token", RQ_MEMBER_INFO);
@@ -236,8 +235,8 @@ void edit_user_request(GtkButton *btn, t_chat *chat) {
 
     trim_message(&desc);
     cJSON_AddNumberToObject(j_request, "token", RQ_UPD_USER);
-    cJSON_AddStringToObject(j_request, "desc", MX_J_STR(desc));
-    cJSON_AddStringToObject(j_request, "name", MX_J_STR(name));
+    cJSON_AddStringToObject(j_request, "desc", VM_J_STR(desc));
+    cJSON_AddStringToObject(j_request, "name", VM_J_STR(name));
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
     
@@ -251,7 +250,7 @@ void log_out_request(GtkButton *btn, t_chat *chat) {
     gchar *j_data = NULL;
 
     cJSON_AddNumberToObject(j_request, "token", RQ_LOG_OUT);
-    cJSON_AddStringToObject(j_request, "auth_token", MX_J_STR(chat->auth_token));
+    cJSON_AddStringToObject(j_request, "auth_token", VM_J_STR(chat->auth_token));
     j_data = vm_message_calibration(j_request);
     vm_send(chat->out, j_data);
 
@@ -287,7 +286,7 @@ void edit_message_request(GtkButton *btn, t_chat *chat) {
 
         cJSON_AddNumberToObject(j_request, "token", RQ_EDIT_MSG);
         cJSON_AddNumberToObject(j_request, "room_id", gmsg->room_id);
-        cJSON_AddStringToObject(j_request, "msg", MX_J_STR(new_text));
+        cJSON_AddStringToObject(j_request, "msg", VM_J_STR(new_text));
         cJSON_AddNumberToObject(j_request, "msg_id", gmsg->msg_id);
 
         j_data = vm_message_calibration(j_request);
@@ -316,7 +315,7 @@ void send_message_request(GtkButton *btn, t_chat *chat) {
 
         cJSON_AddNumberToObject(j_request, "token", RQ_MSG);
         cJSON_AddNumberToObject(j_request, "room_id", room->id);
-        cJSON_AddStringToObject(j_request, "msg", MX_J_STR(message_text));
+        cJSON_AddStringToObject(j_request, "msg", VM_J_STR(message_text));
         cJSON_AddNumberToObject(j_request, "msg_type", DB_TEXT_MSG);
         j_data = vm_message_calibration(j_request);
         vm_send(chat->out, j_data);
@@ -325,7 +324,7 @@ void send_message_request(GtkButton *btn, t_chat *chat) {
     g_free(message_text);
     cJSON_Delete(j_request);
     clear_buffer_text("buffer_message", chat->builder);
-    reset_room_message(NULL, chat->builder);                    ////large pile of code
+    reset_room_message(NULL, chat->builder);
     (void)btn;
 }
 
@@ -348,7 +347,7 @@ void new_room_request(GtkButton *btn, t_chat *chat) {
     gchar *j_data = NULL;
     (void)btn;
     cJSON_AddNumberToObject(j_request, "token", RQ_NEW_ROOM);
-    cJSON_AddStringToObject(j_request, "name", MX_J_STR(roomname));
+    cJSON_AddStringToObject(j_request, "name", VM_J_STR(roomname));
     cJSON_AddStringToObject(j_request, "desc", "");
     cJSON_AddNumberToObject(j_request, "type", DB_GLOBAL_CHAT);
     j_data = vm_message_calibration(j_request);
@@ -388,8 +387,8 @@ void sign_in_request(t_chat *chat) {
         ///form a json object
         cJSON_AddNumberToObject(j_request, "token", RQ_SIGN_IN);
         cJSON_AddStringToObject(j_request, "name", "");
-        cJSON_AddStringToObject(j_request, "login", MX_J_STR(login));
-        cJSON_AddStringToObject(j_request, "pass", MX_J_STR(encrypted_pass));
+        cJSON_AddStringToObject(j_request, "login", VM_J_STR(login));
+        cJSON_AddStringToObject(j_request, "pass", VM_J_STR(encrypted_pass));
         cJSON_AddStringToObject(j_request, "desc", "");
         j_data = vm_message_calibration(j_request);
         ///send the request in json format
@@ -397,7 +396,6 @@ void sign_in_request(t_chat *chat) {
         g_free(j_data);
     }
 
-    // /freeing memory
     g_free(encrypted_pass);
     cJSON_Delete(j_request);
 }
@@ -419,8 +417,8 @@ void sign_up_request(t_chat *chat) {
             ///form a json object
             cJSON_AddNumberToObject(j_request, "token", RQ_SIGN_UP);
             cJSON_AddStringToObject(j_request, "name", "");
-            cJSON_AddStringToObject(j_request, "login", MX_J_STR(login));
-            cJSON_AddStringToObject(j_request, "pass", MX_J_STR(encrypted_pass));
+            cJSON_AddStringToObject(j_request, "login", VM_J_STR(login));
+            cJSON_AddStringToObject(j_request, "pass", VM_J_STR(encrypted_pass));
             cJSON_AddStringToObject(j_request, "desc", "");
             j_data = vm_message_calibration(j_request);
             ///send the request in json format
@@ -432,7 +430,6 @@ void sign_up_request(t_chat *chat) {
         }
     }
 
-    ///freeing memory
     g_free(encrypted_pass);
     cJSON_Delete(j_request);
 }

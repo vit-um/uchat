@@ -27,18 +27,18 @@ gchar *format_text(gchar *text) {
     gchar *result = NULL;
     gchar *save = NULL;
 
-    result = set_tag(text, MX_OP_UNDER, MX_FT_UNDER);
+    result = set_tag(text, VM_OP_UNDER, VM_FT_UNDER);
     save = result;
-    result = set_tag(result, MX_OP_BOLD, MX_FT_BOLD);
+    result = set_tag(result, VM_OP_BOLD, VM_FT_BOLD);
     g_free(save);
     save = result;
-    result = set_tag(result, MX_OP_SCRATCH, MX_FT_SCRATCH);
+    result = set_tag(result, VM_OP_SCRATCH, VM_FT_SCRATCH);
     g_free(save);
     save = result;
-    result = set_tag(result, MX_OP_ITALIC, MX_FT_ITALIC);
+    result = set_tag(result, VM_OP_ITALIC, VM_FT_ITALIC);
     g_free(save);
     save = result;
-    result = set_tag(result, MX_OP_IMPORTANT, MX_FT_IMPORTANT);
+    result = set_tag(result, VM_OP_IMPORTANT, VM_FT_IMPORTANT);
     g_free(save);
     return result;
 }

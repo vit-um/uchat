@@ -1,9 +1,6 @@
-//
-// Created by Максим Гринчак on 11/4/21.
-//
 #include "client.h"
 
-void json_manager(char *response, t_chat *chat) {
+void json_manager(gchar *response, t_chat *chat) {
     cJSON *j_response = cJSON_Parse(response);
     t_request_type token = vm_get_token(j_response);
     

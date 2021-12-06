@@ -1,13 +1,8 @@
-//
-// Created by Максим Гринчак on 11/4/21.
-//
 #include "server.h"
 
 void json_manager(t_client *client) {
     cJSON *j_request = cJSON_Parse(client->request);
     t_request_type token = vm_get_token(j_request);
-
-    fprintf(stdout, "request: %s\n", cJSON_Print(j_request));
 
     switch (token) {
         case RQ_SIGN_UP: {
@@ -109,5 +104,5 @@ void json_manager(t_client *client) {
     }
 
     cJSON_Delete(j_request);
-    g_usleep(MX_DELAY);
+    g_usleep(VM_DELAY);
 }

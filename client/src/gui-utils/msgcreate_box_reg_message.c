@@ -10,38 +10,38 @@ static void msgcreate_box_status(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_
         gtk_box_pack_start(GTK_BOX(box_info), box_status, FALSE, TRUE, 0);
     }
     gtk_widget_set_valign(box_status, GTK_ALIGN_END);
-    mx_msgcreate_label_time(box_status, gmsg, is_own);
+    msgcreate_label_time(box_status, gmsg, is_own);
 }
 
 static void msgcreate_content(GtkWidget *box_main, GtkWidget *box_info, t_gmsg *gmsg, t_chat *chat) {
     if (gmsg->msg_type == DB_TEXT_MSG) {
         widget_set_class(box_info, "box_msg_info");
-        mx_msgcreate_label_text(box_info, gmsg, FALSE);
+        msgcreate_label_text(box_info, gmsg, FALSE);
     }
     else if (gmsg->msg_type == DB_STICKER) {
         widget_set_class(box_info, "box_sticker_info");
-        mx_msgcreate_img_sticker(box_info, gmsg, FALSE);
+        msgcreate_img_sticker(box_info, gmsg, FALSE);
     }
-    else {                                                       //////del if file sending is not going to be implemented 
+    else {
         widget_set_class(box_info, "box_file_info");
-        mx_msgcreate_file(box_info, gmsg, FALSE, chat);
+        msgcreate_file(box_info, gmsg, FALSE, chat);
     }
-    mx_msgcreate_label_login(box_main, gmsg);
+    msgcreate_label_login(box_main, gmsg);
 }
 
 static void msgcreate_own_content(GtkWidget *box_info,
                               t_gmsg *gmsg, t_chat *chat) {
     if (gmsg->msg_type == DB_TEXT_MSG) {
         widget_set_class(box_info, "box_own_msg_info");
-        mx_msgcreate_label_text(box_info, gmsg, TRUE);
+        msgcreate_label_text(box_info, gmsg, TRUE);
     }
     else if (gmsg->msg_type == DB_STICKER) {
         widget_set_class(box_info, "box_own_sticker_info");
-        mx_msgcreate_img_sticker(box_info, gmsg, TRUE);
+        msgcreate_img_sticker(box_info, gmsg, TRUE);
     }
     else {
-        widget_set_class(box_info, "box_own_file_info");       //////del if file sending is not going to be implemented 
-        mx_msgcreate_file(box_info, gmsg, TRUE, chat);
+        widget_set_class(box_info, "box_own_file_info");
+        msgcreate_file(box_info, gmsg, TRUE, chat);
     }
 }
 

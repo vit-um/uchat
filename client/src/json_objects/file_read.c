@@ -26,7 +26,7 @@ static void file_read(gsize size, GFileOutputStream *out, GInputStream *in, GFil
     }
 }
 
-void mx_send_ready(GSocketConnection *conn) {
+void send_ready(GSocketConnection *conn) {
     GOutputStream *out = g_io_stream_get_output_stream(G_IO_STREAM(conn));
     GDataOutputStream *out_d = g_data_output_stream_new(out);
     cJSON *j_request = cJSON_CreateObject();
@@ -39,7 +39,7 @@ void mx_send_ready(GSocketConnection *conn) {
     cJSON_Delete(j_request);
 }
 
-void mx_file_read(gsize size, gchar *name, GInputStream *in) {
+void vm_file_read(gsize size, gchar *name, GInputStream *in) {
     GFile *file = g_file_new_for_path(name);
     GFileOutputStream *out = g_file_create(file, G_FILE_CREATE_NONE, NULL, NULL);
 

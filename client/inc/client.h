@@ -43,8 +43,8 @@ void choose_auth(GtkButton *btn, t_chat *chat);
 void insert_member(cJSON *member, gint room_id, t_chat *chat);
 void trim_message(gchar **message);
 void switch_room_header(GtkBuilder *builder, gint page_index);
-void mx_file_read(gsize size, gchar *name, GInputStream *in);
-void mx_send_ready(GSocketConnection *conn);
+void vm_file_read(gsize size, gchar *name, GInputStream *in);
+void send_ready(GSocketConnection *conn);
 gboolean is_file_animation(gchar *filename);
 gboolean is_file_image(gchar *filename);
 void gupd_msg_text(gint msg_id, gint room_id, char *text, GtkBuilder *builder);
@@ -58,7 +58,7 @@ void add_member(char *login, guint64 user_id, guint64 room_id, t_chat *chat);
 void delete_row_msg(GtkListBoxRow *row, GtkBuilder *builder);
 
 ///**********************|json objects|**********************///
-void json_manager(char *request, t_chat *chat);
+void json_manager(gchar *response, t_chat *chat);
 
 ///---requests
 void sign_up_request(t_chat *chat);
@@ -120,7 +120,7 @@ void start_main_window(t_chat *chat);
 GtkBuilder *init_window(gint argc, char **argv);
 
 void css_connect_from_file(t_chat *chat);
-void mx_css_connect(char *theme, t_chat *chat);
+void css_connect(char *theme, t_chat *chat);
 void change_theme_icon(t_chat *chat, gchar *icon_name);
 
 t_gmsg *create_gmsg(cJSON *msg, t_chat *chat);
@@ -131,8 +131,8 @@ GtkWidget *msgcreate_eventbox();
 GtkWidget *msgcreate_box_main(GtkWidget *eventbox, gboolean is_own);
 void msgcreate_box_info(GtkWidget *box_main, t_gmsg *gmsg, gboolean is_own, t_chat *chat);
 
-GtkWidget *mx_create_reg_message_row(t_gmsg *gmsg, gboolean is_own, t_chat *chat);
-GtkWidget *mx_create_message_row(t_chat *chat, t_gmsg *gmsg);
+GtkWidget *create_reg_message_row(t_gmsg *gmsg, gboolean is_own, t_chat *chat);
+GtkWidget *create_message_row(t_chat *chat, t_gmsg *gmsg);
 
 void add_messages_box(t_groom *room, t_chat *chat);
 void add_room_row(t_groom *room, t_chat *chat, gchar *listbox_name);
@@ -140,7 +140,7 @@ void add_room_row(t_groom *room, t_chat *chat, gchar *listbox_name);
 void reset_select_count(t_groom *groom);
 
 t_signal_data *create_sigdata(t_chat *chat, t_groom *groom, GtkListBoxRow *row_msg);
-void free_sigdata(t_signal_data *data);
+void vm_free_sigdata(t_signal_data *data);
 void clear_global_search(GtkBuilder *builder);
 void search_local_rooms(GtkBuilder *builder, t_filter_data *data);
 gboolean stop_search_room(gpointer *entry, gpointer *data, GtkBuilder *builder);
@@ -184,15 +184,15 @@ void send_message_handle_enter(GtkTextView *textview, GdkEvent *event, t_chat *c
 void send_message_handle_shift(GtkWidget *textview, GdkEvent *event, t_chat *chat);
 void add_message_to_room_new(t_gmsg *msg, t_chat *chat);
 void add_message_to_room_old(t_gmsg *msg, t_chat *chat);
-void mx_msgcreate_label_time(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
-void mx_msgcreate_label_text(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
-void mx_msgcreate_img_sticker(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
-void mx_msgcreate_label_login(GtkWidget *box_main, t_gmsg *gmsg);
-void mx_select_msg(gpointer *eventbox, gpointer *event, t_signal_data *data);
+void msgcreate_label_time(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
+void msgcreate_label_text(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
+void msgcreate_img_sticker(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own);
+void msgcreate_label_login(GtkWidget *box_main, t_gmsg *gmsg);
+void select_msg(gpointer *eventbox, gpointer *event, t_signal_data *data);
 void label_set_num(gchar *widgetname, GtkBuilder *builder, gint number);
 void clear_label_by_name(gchar *label_name, GtkBuilder *builder);
-void mx_msgcreate_file(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own, t_chat *chat);
-void mx_open_files_dir(GtkButton *btn, t_chat *chat);
+void msgcreate_file(GtkWidget *box_info, t_gmsg *gmsg, gboolean is_own, t_chat *chat);
+void open_files_dir(GtkButton *btn, t_chat *chat);
 gchar *format_text(gchar *text);
 t_gmsg *get_gmsg_by_id(guint64 msg_id, guint64 room_id, GtkBuilder *builder);
 void set_room_sett(GtkButton *btn, t_chat *chat);
