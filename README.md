@@ -4,9 +4,12 @@
     </a>
     <h1 align="center">Ucode-Chat</h1>
     <br>
-</p>
+</p>  
+
 
 **Messaging app written on C language, used tools: GLib, cJSON, sqlite3, GTK3 and Glade** 
+
+[![Makefile CI](https://github.com/vit-um/uchat/actions/workflows/makefile.yml/badge.svg?branch=main)](https://github.com/vit-um/uchat/actions/workflows/makefile.yml)	
 
 ## About the program
 
