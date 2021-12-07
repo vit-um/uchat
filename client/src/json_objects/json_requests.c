@@ -79,7 +79,7 @@ void ban_member_request(GObject *btn, t_chat *chat) {
     t_groom *groom = get_selected_groom(chat->builder, "listbox_rooms");
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
-    gint user_id = (gint)g_object_get_data(btn, "member_id");
+    guint64 user_id = (guint64)g_object_get_data(btn, "member_id");
 
     cJSON_AddNumberToObject(j_request, "token", RQ_BAN_MEMBER);
     cJSON_AddNumberToObject(j_request, "room_id", groom->id);
@@ -212,7 +212,7 @@ void send_sticker_request(GtkButton *btn, t_chat *chat) {
 
 void get_member_info_request(GObject *popup, t_chat *chat) {
     cJSON *j_request = cJSON_CreateObject();
-    gint user_id = (gint) g_object_get_data(popup, "member_id");
+    guint64 user_id = (guint64) g_object_get_data(popup, "member_id");
     gchar *j_data = NULL;
 
     cJSON_AddNumberToObject(j_request, "token", RQ_MEMBER_INFO);
