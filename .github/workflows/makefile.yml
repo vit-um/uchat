@@ -12,5 +12,7 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
-      - name: build application
-        run: make
+      - name: build cjson
+        run: make cjson
+      - name: build sqlite3
+        run: make sqlite3
