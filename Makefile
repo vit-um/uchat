@@ -1,3 +1,22 @@
+ifeq '$(findstring ;,$(PATH))' ';'
+    detected_OS := Windows
+else
+    detected_OS := $(shell uname 2>/dev/null || echo Unknown)
+    detected_OS := $(patsubst CYGWIN%,Cygwin,$(detected_OS))
+    detected_OS := $(patsubst MSYS%,MSYS,$(detected_OS))
+    detected_OS := $(patsubst MINGW%,MSYS,$(detected_OS))
+endif
+
+#colors:
+B = \033[1;94m#   BLUE
+G = \033[1;92m#   GREEN
+Y = \033[1;93m#   YELLOW
+R = \033[1;31m#   RED
+M = \033[1;95m#   MAGENTA
+K = \033[K#       ERASE END OF LINE
+D = \033[0m#      DEFAULT
+A = \007#         BEEP
+
 CLIENT = uchat
 SERVER = uchat_server
 CJSON = cjson
@@ -20,12 +39,13 @@ VMDIRO = $(LIBDIR)/$(VM)
 all: ENV_VERIFICATION $(CJSON) $(SQL) $(VM) $(CLIENT) $(SERVER)
 
 ENV_VERIFICATION:
-	@echo ------------START ENV VERIFICATION-------------
+ifeq ($(detected_OS),Linux)        
+	@printf "Detected OS: $R$(detected_OS)$D\n"
 	@if ! dpkg -s libgtk-3-dev | grep Status | grep -q installed; then \
 		echo ERROR: sudo package not installed!; \
 		sudo apt-get update; \
 		sudo apt-get install -y libgtk-3-dev; fi
-	@echo -------------END ENV VERIFICATION---------------
+endif
 
 $(CJSON): $(CJSONDIRO)
 $(SQL): $(SQLDIRO)
