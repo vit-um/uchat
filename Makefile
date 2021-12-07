@@ -23,6 +23,7 @@ ENV_VERIFICATION:
 	@echo ------------START ENV VERIFICATION-------------
 	@if ! dpkg -s libgtk-3-dev | grep Status | grep -q installed; then \
 		echo ERROR: sudo package not installed!; \
+		sudo apt-get update; \
 		sudo apt-get install -y libgtk-3-dev; fi
 	@echo -------------END ENV VERIFICATION---------------
 
