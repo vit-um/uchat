@@ -1,6 +1,7 @@
 #pragma once
 
 #define GTK_STYLE_CLASS_TOOLTIP "tooltip"
+#define GTK_STYLE_CLASS_CONTEXT_MENU "context-menu"
 
 #define MAX_CLIENTS 10
 #define BUF_SIZE 2048

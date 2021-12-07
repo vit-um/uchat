@@ -8,10 +8,11 @@
     outline-color: transparent;
     outline-style: double;
     background-color: transparent;
+    -gtk-icon-source: builtin;
 }
 
 button, .input, .titlebar, button image, entry, notebook {
-    -gtk-icon-effect: none;
+    -gtk-icon-effect: highlight;
     -gtk-icon-shadow: none;
     text-shadow: none;
     box-shadow: none;
@@ -26,10 +27,24 @@ button, .input, .titlebar, button image, entry, notebook {
 
 tooltip {
     background: #53565a;
-    opacity: 0.85;
+    opacity: 0.9;
     text-shadow: none;   
     border: 1px solid #d6f0ff;    
 }
+
+.context-menu, .context-menu box {
+    background: #d6f0ff;
+    text-shadow: none;   
+    border: 1px solid #157ce1;  
+}
+.context-menu label:disabled {
+    color: #919dc1; 
+}
+.context-menu label:hover {
+    color:#ffffff; 
+}
+
+
 headerbar {
     min-height: 40px;
     background: #157ce1;
