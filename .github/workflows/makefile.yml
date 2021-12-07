@@ -16,3 +16,5 @@ jobs:
         run: make cjson
       - name: build sqlite3
         run: make sqlite3
+      - name: build all
+        run: make

@@ -21,9 +21,9 @@ all: ENV_VERIFICATION $(CJSON) $(SQL) $(VM) $(CLIENT) $(SERVER)
 
 ENV_VERIFICATION:
 	@echo ------------START ENV VERIFICATION-------------
-	@if ! dpkg -s pkg-config | grep Status | grep -q installed; then \
+	@if ! dpkg -s libgtk-3-dev | grep Status | grep -q installed; then \
 		echo ERROR: sudo package not installed!; \
-		apt-get install -y pkg-config; fi
+		sudo apt-get install -y libgtk-3-dev; fi
 	@echo -------------END ENV VERIFICATION---------------
 
 $(CJSON): $(CJSONDIRO)
