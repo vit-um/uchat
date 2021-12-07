@@ -15,7 +15,7 @@
 
 - Support OS: Ubuntu, MacOS
 - Default compilation mode: `make`
-- Compilation in debug mode: `make uchat debug` or/and `make uchat_server debug`
+- Compilation in debug mode: `cd client; make debug; cd ..`
 - Files for use: uchat, uchat_server
 
 [![Watch the video](client/resources/chat_demo.jpg)](https://www.youtube.com/embed/nfWz2LhWfvM)
