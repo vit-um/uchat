@@ -81,6 +81,9 @@ clean:
 	
 uninstall: clean
 	@rm -f $(NAME)
+	@rm -rf cache/*
+	@mkdir -p cache/files/
+	@echo "this is an example\n" > cache/files/file.exemple
 	@printf "$A$M$(NAME)	$Runinstalled$D\n"
 
 reinstall: uninstall all
