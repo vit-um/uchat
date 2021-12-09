@@ -1,7 +1,7 @@
 #include "server.h"
 
 void clear_room_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -21,7 +21,7 @@ void clear_room_response(cJSON *j_request, t_client *client) {
 }
 
 void edit_room_desc_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     gchar *room_desc = vm_get_valuestring(j_request, "desc");
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
@@ -44,7 +44,7 @@ void edit_room_desc_response(cJSON *j_request, t_client *client) {
 }
 
 void edit_room_name_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     gchar *room_name = vm_get_valuestring(j_request, "room_name");
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
@@ -67,7 +67,7 @@ void edit_room_name_response(cJSON *j_request, t_client *client) {
 }
 
 void get_member_info_response(cJSON *j_request, t_client *client) {
-    gint user_id = vm_get_object(j_request, "user_id")->valueint;
+    guint64 user_id = vm_get_object(j_request, "user_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     t_db_user *user = NULL;
     gchar *j_data = NULL;
@@ -108,8 +108,8 @@ void edit_user_response(cJSON *j_request, t_client *client) {
 }
 
 void del_msg_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
-    gint msg_id = vm_get_object(j_request, "msg_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 msg_id = vm_get_object(j_request, "msg_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -130,7 +130,7 @@ void del_msg_response(cJSON *j_request, t_client *client) {
 }
 
 void del_room_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -147,8 +147,8 @@ void del_room_response(cJSON *j_request, t_client *client) {
 }
 
 void ban_member_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
-    gint user_id = vm_get_object(j_request, "user_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 user_id = vm_get_object(j_request, "user_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -175,18 +175,18 @@ void ban_member_response(cJSON *j_request, t_client *client) {
     g_free(j_data);
 }
 
-static bool is_valid_member(sqlite3 *db, gint user_id, gint room_id) {
+static bool is_valid_member(sqlite3 *db, guint64 user_id, guint64 room_id) {
     return get_member_type(db, user_id, room_id) != DB_BANNED && is_member(db, user_id, room_id);
 }
 
-static bool is_valid_msg_rq(gchar *msg, sqlite3 *db, gint user_id, gint room_id) {
+static bool is_valid_msg_rq(gchar *msg, sqlite3 *db, guint64 user_id, guint64 room_id) {
     return is_valid_member(db, user_id, room_id) && is_valid_info(msg, MAX_MESSAGE);
 }
 
 void download_file_response(cJSON *j_request, t_client *client) {
     gchar *auth_token = vm_get_valuestring(j_request, "auth_token");
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
-    gint msg_id = vm_get_object(j_request, "msg_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 msg_id = vm_get_object(j_request, "msg_id")->valueint;
     gchar *msg = get_message_by_id(client->info->database, msg_id);
 
     client->is_file = true;
@@ -252,7 +252,7 @@ static gpointer upload_file_thread(gpointer data) {
 void upload_file_response(cJSON *j_request, t_client *client) {
     gchar *name = vm_get_valuestring(j_request, "name");
     gint size = vm_get_object(j_request, "size")->valueint;
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     gchar *auth_token = vm_get_valuestring(j_request, "auth_token");
     t_file_helper *file = g_malloc0(sizeof(t_file_helper));
     
@@ -274,7 +274,7 @@ void upload_file_response(cJSON *j_request, t_client *client) {
 }
 
 void join_to_room_response(cJSON *j_request, t_client *client) {
-    gint room_id = vm_get_object(j_request, "id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     t_db_room *db_room = NULL;
     gchar *j_data = NULL;
@@ -312,7 +312,7 @@ void join_to_room_response(cJSON *j_request, t_client *client) {
 
 void search_msg_response(cJSON *j_request, t_client *client) {
     gchar *search_msg = vm_get_valuestring(j_request, "search_msg");
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     cJSON *j_msgs = NULL;
     gchar *j_data = NULL;
@@ -377,7 +377,7 @@ void log_out_response(cJSON *j_request, t_client *client) {
 void new_messages_response(cJSON *j_request, t_client *client) {
     cJSON *date = vm_get_object(j_request, "date");
     cJSON *count = vm_get_object(j_request, "count");
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     cJSON *j_response = NULL;
     gchar *j_data = NULL;
 
@@ -396,7 +396,7 @@ void new_messages_response(cJSON *j_request, t_client *client) {
 void old_messages_response(cJSON *j_request, t_client *client) {
     cJSON *date = vm_get_object(j_request, "date");
     cJSON *count = vm_get_object(j_request, "count");
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     cJSON *j_response = NULL;
     gchar *j_data = NULL;
 
@@ -416,7 +416,7 @@ void old_messages_response(cJSON *j_request, t_client *client) {
 
 void edit_message_response(cJSON *j_request, t_client *client) {
     gchar *new_msg_str = vm_get_valuestring(j_request, "msg");
-    gint room_id = vm_get_object(j_request, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_request, "room_id")->valueint;
     gdouble msg_id = vm_get_object(j_request, "msg_id")->valuedouble;
     cJSON *j_response = cJSON_CreateObject();
     gchar *j_data = NULL;
@@ -513,7 +513,7 @@ void new_room_response(cJSON *j_request, t_client *client) {
 }
 
 void get_rooms_response(cJSON *j_request, t_client *client) {
-    gint date = vm_get_object(j_request, "date")->valueint;
+    guint64 date = vm_get_object(j_request, "date")->valueint;
     cJSON *j_response = cJSON_CreateObject();
     cJSON *j_rooms = NULL;
     gchar *j_data = NULL;

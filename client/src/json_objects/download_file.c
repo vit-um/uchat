@@ -38,7 +38,7 @@ static void file_ready(GObject *source_object, GAsyncResult *res, gpointer user_
  * msg_id: message id that contains file
  * chat: information about chat
  */
-void download_file_request(gint room_id, gint msg_id, t_chat *chat) {
+void download_file_request(guint64 room_id, guint64 msg_id, t_chat *chat) {
     GSocketConnection *conn = g_socket_client_connect_to_host(
         chat->client_conn, chat->argv[1],
         g_ascii_strtoll(chat->argv[2], NULL, 10), NULL, NULL);

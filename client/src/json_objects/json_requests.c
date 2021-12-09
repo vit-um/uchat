@@ -16,7 +16,7 @@ void clear_room_request(GtkButton *btn, t_chat *chat) {
     cJSON_Delete(j_request);
 }
 
-void edit_room_desc_request(GDataOutputStream *out, gint room_id, gchar *new_desc) {
+void edit_room_desc_request(GDataOutputStream *out, guint64 room_id, gchar *new_desc) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -30,7 +30,7 @@ void edit_room_desc_request(GDataOutputStream *out, gint room_id, gchar *new_des
     cJSON_Delete(j_request);
 }
 
-void edit_room_name_request(GDataOutputStream *out, gint room_id, gchar *new_name) {
+void edit_room_name_request(GDataOutputStream *out, guint64 room_id, gchar *new_name) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -92,7 +92,7 @@ void ban_member_request(GObject *btn, t_chat *chat) {
     cJSON_Delete(j_request);
 }
 
-void new_messages_request(GDataOutputStream *out, gint date, gint room_id) {
+void new_messages_request(GDataOutputStream *out, guint64 date, guint64 room_id) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -259,7 +259,7 @@ void log_out_request(GtkButton *btn, t_chat *chat) {
     cJSON_Delete(j_request);
 }
 
-void old_messages_request(GDataOutputStream *out, gint date, gint room_id) {
+void old_messages_request(GDataOutputStream *out, guint64 date, guint64 room_id) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -328,7 +328,7 @@ void send_message_request(GtkButton *btn, t_chat *chat) {
     (void)btn;
 }
 
-void get_members_request(t_chat *chat, gint room_id) {
+void get_members_request(t_chat *chat, guint64 room_id) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 
@@ -358,7 +358,7 @@ void new_room_request(GtkButton *btn, t_chat *chat) {
     clear_buffer_text("buffer_roomname", chat->builder);
 }
 
-void get_rooms_request(GDataOutputStream *out, gint date) {
+void get_rooms_request(GDataOutputStream *out, guint64 date) {
     cJSON *j_request = cJSON_CreateObject();
     gchar *j_data = NULL;
 

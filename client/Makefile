@@ -82,6 +82,8 @@ clean:
 	
 uninstall: clean
 	@rm -f $(NAME)
+	rm -rf client/cache/*.*
+	mkdir -p client/cache/files/
 	@printf "$A$M$(NAME)		$Runinstalled$D\n"
 
 reinstall: uninstall all

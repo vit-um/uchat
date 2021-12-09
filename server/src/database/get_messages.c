@@ -29,8 +29,8 @@ cJSON *get_object_message(sqlite3_stmt *stmt) {
  * -------------------------------
  * 
  */
-static cJSON *get_messages_by_id(sqlite3_stmt *stmt, gint room_id, 
-                                 gint64 count, gint date) {
+static cJSON *get_messages_by_id(sqlite3_stmt *stmt, guint64 room_id, 
+                                 gint64 count, guint64 date) {
     cJSON *room = cJSON_CreateObject();
     cJSON *message = cJSON_CreateArray();
 
@@ -56,8 +56,8 @@ static cJSON *get_messages_by_id(sqlite3_stmt *stmt, gint room_id,
  * 
  * return json object *
  */
-cJSON *get_new_messages_by_id(sqlite3 *db, gint room_id,
-                                 gint date, gint64 count) {
+cJSON *get_new_messages_by_id(sqlite3 *db, guint64 room_id,
+                                 guint64 date, gint64 count) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
     gchar *request = create_request_message_by_id(db, room_id, DB_NEW_MESSAGE);
@@ -79,8 +79,8 @@ cJSON *get_new_messages_by_id(sqlite3 *db, gint room_id,
  * 
  * return json object
  */
-cJSON *get_old_messages_by_id(sqlite3 *db, gint room_id,
-                              gint date, gint64 count) {
+cJSON *get_old_messages_by_id(sqlite3 *db, guint64 room_id,
+                              guint64 date, gint64 count) {
     sqlite3_stmt *stmt;
     gchar *request = create_request_message_by_id(db, room_id, DB_OLD_MESSAGE);
     sqlite3_prepare_v2(db, request, -1, &stmt, NULL);

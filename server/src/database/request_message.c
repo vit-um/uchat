@@ -18,7 +18,7 @@ static void message_new(sqlite3_str **str) {
  * 
  * return: request in gchar format
  */
-gchar *create_request_message_by_id(sqlite3 *db, gint room_id, gint8 type) {
+gchar *create_request_message_by_id(sqlite3 *db, guint64 room_id, gint8 type) {
     sqlite3_str *str = sqlite3_str_new(db);
     gchar *request = NULL;
     void (*func[])(sqlite3_str **) = {message_new, message_old};

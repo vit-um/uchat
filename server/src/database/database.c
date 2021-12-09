@@ -71,7 +71,7 @@ void insert_message_into_db(sqlite3 *db, t_db_message *message) {
     sqlite3_stmt *stmt;
     gint rv;
 
-    message->date = vm_get_time(DB_MILISECOND);
+    message->date = vm_get_time(DB_SECOND);
     message->status = DB_MSG_START;
     rv = sqlite3_prepare_v2(db, "INSERT INTO MESSAGES(USER_ID, ROOM_ID, "
                            "DATE, MESSAGE, TYPE, FILE_SIZE, FILE_NAME, STATUS)"
@@ -133,7 +133,7 @@ static gchar *parse_str_search(gchar *str) {
     return tmp;
 }
 
-cJSON *search_msgs_in_db(sqlite3 *db, gint room_id, gchar *str_search) {
+cJSON *search_msgs_in_db(sqlite3 *db, guint64 room_id, gchar *str_search) {
     gchar *str_search_join = NULL;
     sqlite3_stmt *stmt;
     cJSON *messages = cJSON_CreateArray();
@@ -218,7 +218,7 @@ cJSON *get_json_rooms(sqlite3 *db, guint64 date, guint64 user_id) {
  * 
  * return: json object
  */
-cJSON *search_rooms_in_db(sqlite3 *db, gint user_id, gchar *str_search) {
+cJSON *search_rooms_in_db(sqlite3 *db, guint64 user_id, gchar *str_search) {
     sqlite3_stmt *stmt;
     gchar *str_search_join = NULL;
     cJSON *rooms = cJSON_CreateArray();
@@ -348,7 +348,7 @@ static cJSON *get_object_member(sqlite3_stmt *stmt) {
  * 
  * return: json object
  */
-cJSON *get_json_members(sqlite3 *db, gint room_id) {
+cJSON *get_json_members(sqlite3 *db, guint64 room_id) {
     cJSON *members = cJSON_CreateArray();
     sqlite3_stmt *stmt;
 
@@ -366,8 +366,8 @@ cJSON *get_json_members(sqlite3 *db, gint room_id) {
 }
 
 void insert_member_into_db(sqlite3 *db,
-                           gint room_id,
-                           gint user_id,
+                           guint64 room_id,
+                           guint64 user_id,
                            gint8 permission) {
     gint32 rv = SQLITE_OK;
     sqlite3_str *sqlite_str = sqlite3_str_new(db);
@@ -376,7 +376,7 @@ void insert_member_into_db(sqlite3 *db,
     sqlite3_str_appendf(sqlite_str, "INSERT INTO MEMBERS(USER_ID, ROOM_ID, "
                                     "DATE, PERMISSION)VALUES(%d, %lu, "
                                     "%llu, %d);",
-                        user_id, room_id, vm_get_time(DB_MILISECOND),
+                        user_id, room_id, vm_get_time(DB_SECOND),
                         permission);
     request = sqlite3_str_finish(sqlite_str);
     rv = sqlite3_exec(db, request, 0, 0, 0);
@@ -405,7 +405,7 @@ void insert_room_into_db(sqlite3 *db, t_db_room *room) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
 
-    room->date = vm_get_time(DB_MILISECOND);
+    room->date = vm_get_time(DB_SECOND);
     rv = sqlite3_prepare_v2(db, "INSERT INTO ROOMS(NAME, USER_ID, DATE, "
                                 "DESC, TYPE) VALUES(?1, ?2, ?3, ?4, ?5);",
                             -1, &stmt, 0);
@@ -448,7 +448,7 @@ bool correct_credentials(sqlite3 *db, char *username, char *password) {
 void create_new_user(sqlite3 *db, t_db_user *user) {
     sqlite3_stmt *stmt;
 
-    user->date = vm_get_time(DB_MILISECOND);
+    user->date = vm_get_time(DB_SECOND);
 
     sqlite3_prepare_v2(db, "INSERT INTO USERS(NAME, LOGIN, PASS, AUTH_TOKEN, DATE, DESC)"
                            "VALUES (?1, ?2, ?3, ?4, ?5, ?6);", -1, &stmt, NULL);

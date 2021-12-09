@@ -6,7 +6,7 @@ t_gmsg *create_gmsg(cJSON *msg, t_chat *chat) {
 
     gmsg->room_id = vm_get_object(msg, "room_id")->valueint;
     groom = get_groom_by_id(gmsg->room_id, chat->builder);
-    gint user_id = vm_get_object(msg, "user_id")->valueint;
+    guint64 user_id = vm_get_object(msg, "user_id")->valueint;
     gpointer hash = g_hash_table_lookup(groom->members, GINT_TO_POINTER(user_id));
 
     gmsg->login = g_strdup(VM_J_STR(hash));

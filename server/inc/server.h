@@ -81,7 +81,7 @@ void run_the_server(char *port);
 
 
 ///**********************|server utils|**********************///
-void vm_send_to_all(gchar *j_data, t_client *client, gint room_id);
+void vm_send_to_all(gchar *j_data, t_client *client, guint64 room_id);
 
 
 ///**********************|json_objects|**********************///
@@ -117,8 +117,8 @@ void get_user_id(sqlite3 *db, t_db_user *user);
 gchar *create_user_token(char *login);
 gboolean is_valid_room_name(gchar *roomname);
 gboolean is_valid_info(gchar *msg, gsize max_value);
-gint8 get_member_type(sqlite3 *db, gint user_id, gint room_id);
-GList *get_members_list(sqlite3 *db, gint room_id);
+gint8 get_member_type(sqlite3 *db, guint64 user_id, guint64 room_id);
+GList *get_members_list(sqlite3 *db, guint64 room_id);
 gboolean read_file_req(t_client *client, gsize size, char *name);
 void download_file_req(gchar *msg, t_client *client);
 

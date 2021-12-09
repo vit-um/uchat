@@ -43,7 +43,7 @@ static void send_file(gchar *j_data, GFile *file, t_chat *chat) {
  * room_id: room id
  * chat: information about chat
  */
-void upload_file_request(gchar *path, gint room_id, t_chat *chat) {
+void upload_file_request(gchar *path, guint64 room_id, t_chat *chat) {
     GFile *file = g_file_new_for_path(path);
     GFileInfo *info = g_file_query_info(file, "standard::size,standard::name", G_FILE_QUERY_INFO_NONE, NULL, NULL);
     cJSON *j_request = cJSON_CreateObject();

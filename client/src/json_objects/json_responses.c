@@ -1,13 +1,13 @@
 #include "client.h"
 
 void clear_room_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
     gupd_clear_history(chat->builder, room_id);
 }
 
 void edit_room_desc_response(cJSON *j_response, t_chat *chat) {
     gchar *room_desc = vm_get_valuestring(j_response, "desc");
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
 
     gupd_room_desc(room_id, room_desc, chat->builder);
     g_free(room_desc);
@@ -15,7 +15,7 @@ void edit_room_desc_response(cJSON *j_response, t_chat *chat) {
 
 void edit_room_name_response(cJSON *j_response, t_chat *chat) {
     gchar *room_name = vm_get_valuestring(j_response, "room_name");
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
 
     gupd_room_name(room_id, room_name, chat->builder);
     g_free(room_name);
@@ -46,8 +46,8 @@ void edit_user_response(cJSON *j_response, t_chat *chat) {
 }
 
 void del_msg_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
-    gint msg_id = vm_get_object(j_response, "msg_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 msg_id = vm_get_object(j_response, "msg_id")->valueint;
     t_groom *groom = get_groom_by_id(room_id, chat->builder);
     t_gmsg *gmsg = get_gmsg_by_id(msg_id, room_id, chat->builder);
 
@@ -59,14 +59,14 @@ void del_msg_response(cJSON *j_response, t_chat *chat) {
 }
 
 void del_room_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
     t_groom *groom = get_groom_by_id(room_id, chat->builder);
     delete_row_room(groom->row_room, chat->builder);
 }
 
 void ban_member_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
-    gint user_id = vm_get_object(j_response, "user_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 user_id = vm_get_object(j_response, "user_id")->valueint;
     t_groom *groom = get_groom_by_id(room_id, chat->builder);
 
     if (g_hash_table_contains(groom->members, GINT_TO_POINTER(user_id))) {
@@ -76,14 +76,14 @@ void ban_member_response(cJSON *j_response, t_chat *chat) {
 
 void new_member_response(cJSON *j_response, t_chat *chat) {
     gchar *login = vm_get_valuestring(j_response, "login");
-    gint id = vm_get_object(j_response, "user_id")->valueint;
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 id = vm_get_object(j_response, "user_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
 
     add_member(login, id, room_id, chat);
 }
 
 void join_to_room_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "id")->valueint;
 
     new_room_response(j_response, chat);
     new_messages_request(chat->out, 0, room_id);
@@ -154,7 +154,7 @@ void new_messages_response(cJSON *j_response, t_chat *chat) {
 }
 
 void old_messages_response(cJSON *j_response, t_chat *chat) {
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
     cJSON *messages = vm_get_object(j_response, "messages");
     t_groom *groom = NULL;
     cJSON *msg = NULL;
@@ -173,8 +173,8 @@ void old_messages_response(cJSON *j_response, t_chat *chat) {
 
 void edit_message_response(cJSON *j_response, t_chat *chat) {
     gchar *msg = vm_get_valuestring(j_response, "msg");
-    gint room_id = vm_get_object(j_response, "room_id")->valueint;
-    gint msg_id = vm_get_object(j_response, "msg_id")->valueint;
+    guint64 room_id = vm_get_object(j_response, "room_id")->valueint;
+    guint64 msg_id = vm_get_object(j_response, "msg_id")->valueint;
 
     gupd_msg_text(msg_id, room_id, msg, chat->builder);
 }

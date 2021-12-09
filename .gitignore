@@ -47,7 +47,6 @@ dkms.conf
 ._.DS_Store
 *.o
 *.out
-.vscode/**/*
 .idea/**/*
 .idea
 cmake-build-debug

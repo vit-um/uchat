@@ -10,7 +10,7 @@
  * 
  * return permissiom user in this room
  */
-gint8 get_member_type(sqlite3 *db, gint user_id, gint room_id) {
+gint8 get_member_type(sqlite3 *db, guint64 user_id, guint64 room_id) {
     sqlite3_stmt *stmt;
     gint32 rv = 0;
     gint8 perm_user = -1;
@@ -37,7 +37,7 @@ gint8 get_member_type(sqlite3 *db, gint user_id, gint room_id) {
  * 
  * return TRUE if user is owner
  */
-gboolean is_msg_owner(sqlite3 *db, gint user_id, gint msg_id) {
+gboolean is_msg_owner(sqlite3 *db, guint64 user_id, guint64 msg_id) {
     sqlite3_stmt *stmt;
     gint32 rv = 0;
     gboolean is_owner = false;
@@ -64,7 +64,7 @@ gboolean is_msg_owner(sqlite3 *db, gint user_id, gint msg_id) {
  * 
  * return: TRUE or FALSE
  */
-gboolean is_member(sqlite3 *db, gint user_id, gint room_id) {
+gboolean is_member(sqlite3 *db, guint64 user_id, guint64 room_id) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
 

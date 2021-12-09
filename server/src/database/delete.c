@@ -8,7 +8,7 @@
  * 
  * room_id: room id
  */
-void delete_all_msgs(sqlite3 *db, gint room_id) {
+void delete_all_msgs(sqlite3 *db, guint64 room_id) {
     sqlite3_str *sqlite_str = sqlite3_str_new(db);
     gchar *request = NULL;
 

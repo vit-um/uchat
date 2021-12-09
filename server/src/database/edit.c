@@ -8,7 +8,7 @@
  * id: room_id
  * new_name: new room name
  */
-void edit_room_desc_by_id(sqlite3 *db, gint id, gchar *new_name) {
+void edit_room_desc_by_id(sqlite3 *db, guint64 id, gchar *new_name) {
     sqlite3_stmt *stmt;
 
     sqlite3_prepare_v2(db, "update rooms set desc = ?1 "
@@ -28,7 +28,7 @@ void edit_room_desc_by_id(sqlite3 *db, gint id, gchar *new_name) {
  * id: room_id
  * new_name: new room name
  */
-void edit_room_name_by_id(sqlite3 *db, gint id, gchar *new_name) {
+void edit_room_name_by_id(sqlite3 *db, guint64 id, gchar *new_name) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
 
@@ -49,7 +49,7 @@ void edit_room_name_by_id(sqlite3 *db, gint id, gchar *new_name) {
  * id: user_id
  * new_name: new user name
  */
-void edit_user_name_by_id(sqlite3 *db, gint id, gchar *new_name) {
+void edit_user_name_by_id(sqlite3 *db, guint64 id, gchar *new_name) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
 
@@ -70,7 +70,7 @@ void edit_user_name_by_id(sqlite3 *db, gint id, gchar *new_name) {
  * id: message id
  * new: new message
  */
-void edit_message_by_id(sqlite3 *db, gint id, gchar *new) {
+void edit_message_by_id(sqlite3 *db, guint64 id, gchar *new) {
     sqlite3_stmt *stmt;
     gint32 rv = SQLITE_OK;
 
@@ -92,7 +92,7 @@ void edit_message_by_id(sqlite3 *db, gint id, gchar *new) {
  * user_id: user id
  * new type: new permission
  */
-void edit_member_type(sqlite3 *db, gint room_id, gint user_id, gint8 new_type) {
+void edit_member_type(sqlite3 *db, guint64 room_id, guint64 user_id, gint8 new_type) {
     sqlite3_str *sqlite_str = sqlite3_str_new(db);
     gchar *request = NULL;
 

@@ -72,7 +72,7 @@ void set_profile_info(GtkButton *btn, t_chat *chat) {
 
 void insert_room(cJSON *j_room, t_chat *chat) {
     cJSON *room_dup = cJSON_Duplicate(j_room, cJSON_True);
-    gint room_id = vm_get_object(room_dup, "id")->valueint;
+    guint64 room_id = vm_get_object(room_dup, "id")->valueint;
 
     cJSON_AddStringToObject(room_dup, "valid", "true");
     cJSON_AddStringToObject(room_dup, "err_msg", "valid roomname");
@@ -82,7 +82,7 @@ void insert_room(cJSON *j_room, t_chat *chat) {
     cJSON_Delete(room_dup);
 }
 
-void insert_old_msg(cJSON *msg, t_chat *chat, gint room_id) {
+void insert_old_msg(cJSON *msg, t_chat *chat, guint64 room_id) {
     cJSON *dup = cJSON_Duplicate(msg, cJSON_True);
     t_gmsg *gmsg = NULL;
 
@@ -148,7 +148,7 @@ void add_member(char *login, guint64 user_id, guint64 room_id, t_chat *chat) {
     g_hash_table_insert(groom->members, GINT_TO_POINTER(user_id), g_strdup(login));
 }
 
-void insert_member(cJSON *member, gint room_id, t_chat *chat) {
+void insert_member(cJSON *member, guint64 room_id, t_chat *chat) {
     gchar *login = vm_get_valuestring(member, "login");
     guint64 user_id = vm_get_object(member, "id")->valueint;
     t_groom *groom = NULL;

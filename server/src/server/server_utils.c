@@ -10,7 +10,7 @@
  * 
  * return: GList with login users
  */
-GList *get_members_list(sqlite3 *db, gint room_id) {
+GList *get_members_list(sqlite3 *db, guint64 room_id) {
     sqlite3_stmt *stmt;
     GList *list = NULL;
 
@@ -48,7 +48,7 @@ static void send_to_all(gpointer list, gpointer user_data) {
  * 
  * returns: new request
  */
-void vm_send_to_all(gchar *j_data, t_client *client, gint room_id) {
+void vm_send_to_all(gchar *j_data, t_client *client, guint64 room_id) {
     GList *list = get_members_list(client->info->database, room_id);
     t_send_helper *send_helper = g_malloc0(sizeof(t_send_helper));
 

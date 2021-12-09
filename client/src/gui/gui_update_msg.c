@@ -23,7 +23,7 @@ t_gmsg *get_gmsg_by_id(guint64 msg_id, guint64 room_id, GtkBuilder *builder) {
     return NULL;
 }
 
-void gupd_msg_text(gint msg_id, gint room_id, char *text, GtkBuilder *builder) {
+void gupd_msg_text(guint64 msg_id, guint64 room_id, char *text, GtkBuilder *builder) {
     t_gmsg *gmsg = get_gmsg_by_id(msg_id, room_id, builder);
 
     if (gmsg) {
